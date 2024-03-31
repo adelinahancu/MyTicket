@@ -1,0 +1,31 @@
+
+    <div class="form-container">
+      
+        <div class="form login_form">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <h2>Login</h2>
+                <div class="input_box">
+                    <input type="email" placeholder="Email" formControlName="email" [(ngModel)]="email">
+                    <div class="text-danger" *ngIf="loginForm.controls['email'].invalid  &&(loginForm.controls['email'].touched || loginForm.controls['email'].dirty || isFormSubmitted)">
+                    <span *ngIf="loginForm.controls['email'].errors?.['required']">*Email is required.</span>
+                    <span *ngIf="loginForm.controls['email'].errors?.['email']">*Email is invalid.</span>
+                    </div>
+                    <mat-icon>account_circle</mat-icon>
+                </div>
+                <div class="input_box">
+                    <input [type]="hide ? 'password':'text'" formControlName="password" placeholder="Password" [(ngModel)]="password" >
+                    <div class="text-danger" *ngIf="loginForm.controls['password'].invalid &&(loginForm.controls['password'].touched || loginForm.controls['password'].dirty || isFormSubmitted)">
+                        <span *ngIf="loginForm.controls['password'].errors?.['required']">*Password is required.</span>
+                        <span *ngIf="loginForm.controls['password'].errors?.['minlength']">*Min 6 characters required.</span>
+                        </div>
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    
+                </div>
+                <button class="button" type="submit" >Conectează-te</button>
+
+                <div class="login_signup">
+                    Nu ai cont? <a href="/registration">Înregistrează-te</a>
+                </div>
+            </form>
+        </div>
+    </div>

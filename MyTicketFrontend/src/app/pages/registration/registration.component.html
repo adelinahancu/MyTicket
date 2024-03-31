@@ -1,0 +1,72 @@
+<app-navbar></app-navbar>
+<div class="registration-container">
+    <div class="form registration-form">
+       
+        
+        <form 
+        #f="ngForm"
+        (ngSubmit)="f.valid && onSubmit()" 
+        [formGroup]="registrationForm" >
+            <h2>Registration</h2>
+
+            <div class="input_box">
+            <input type="text" placeholder="First Name" formControlName="firstName" [(ngModel)]="user.firstname" >
+            <div class="text-danger" *ngIf="registrationForm.controls['firstName'].invalid  &&(registrationForm.controls['firstName'].touched || registrationForm.controls['firstName'].dirty || isFormSubmitted)">
+                <span *ngIf="registrationForm.controls['firstName'].errors?.['required']">*FirstName is required.</span>
+                
+                </div>
+            <mat-icon matSuffix>person</mat-icon>
+          </div>
+
+          <div class="input_box">
+            <input type="text" placeholder="Last Name" [(ngModel)]="user.lastname" formControlName="lastName">
+            <div class="text-danger" *ngIf="registrationForm.controls['lastName'].invalid  &&(registrationForm.controls['lastName'].touched || registrationForm.controls['lastName'].dirty || isFormSubmitted)">
+                <span *ngIf="registrationForm.controls['lastName'].errors?.['required']">*LastName is required.</span>
+                
+                </div>
+            <mat-icon matSuffix>person</mat-icon>
+        </div>
+
+        <div class="input_box">
+            <input type="email" placeholder="Email" [(ngModel)]="user.email" formControlName="email">
+            <div class="text-danger" *ngIf="registrationForm.controls['email'].invalid  &&(registrationForm.controls['email'].touched || registrationForm.controls['email'].dirty || isFormSubmitted)">
+                <span *ngIf="registrationForm.controls['email'].errors?.['required']">*Emails is required.</span>
+                <span *ngIf="registrationForm.controls['email'].errors?.['email']">*Invalid email.</span>
+            </div>
+            <mat-icon matSuffix>email</mat-icon>
+        </div>
+
+        <div class="input_box">
+            <input [type]="hide ? 'password':'text'"  placeholder="Password" [(ngModel)]="user.password" formControlName="password">
+            <div class="text-danger" *ngIf="registrationForm.controls['password'].invalid  &&(registrationForm.controls['password'].touched || registrationForm.controls['password'].dirty || isFormSubmitted)">
+                <span *ngIf="registrationForm.controls['password'].errors?.['required']">*Password is required.</span>
+                <span *ngIf="registrationForm.controls['password'].errors?.['minlength']">*Min 6 characters.</span>
+                </div>
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </div>
+
+        <div class="input_box">
+            <input [type]="hide ? 'password' : 'text'" formControlName="confirmPassword" placeholder="Confirm your password">
+            <mat-icon matSuffix (click)="hide = !hide">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+            <div class="text-danger" *ngIf="registrationForm.controls['confirmPassword'].invalid  &&(registrationForm.controls['confirmPassword'].touched || registrationForm.controls['confirmPassword'].dirty || isFormSubmitted)">
+                <span *ngIf="registrationForm.controls['confirmPassword'].errors?.['required']">*Password confirmation is required.</span>
+                <span *ngIf="registrationForm.hasError('passwordMismatch', 'confirmPassword')">*Passwords do not match.</span>
+            </div>
+        </div>
+    <div class="checkbox">
+        <label for="myChekcbox">
+        <input type="checkbox" id="myChekcbox">
+        Sunt de acord cu termenii si conditiile
+    </label>
+    </div>
+
+
+    <button class="button" type="submit">Înregistrează-te</button>
+
+    
+        </form>
+
+       
+
+    </div>
+</div>

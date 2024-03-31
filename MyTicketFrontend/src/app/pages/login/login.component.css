@@ -1,0 +1,93 @@
+
+
+.form-container{
+  position: absolute;
+  max-width:320px;
+  width:100%;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  z-index: 101;
+  padding:25px;
+  border-radius: 0px;
+  box-shadow: 10px 5px 5px 5px rgba(0.05,0,0,0.05);
+  border:2px solid #F5F5F5;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  box-sizing: content-box;
+  background-color: #fff;
+  
+
+}
+
+.form-container h2{
+  font-size:25px ;
+  color:#0b0217;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.input_box{
+  margin-top: 20px;
+  position: relative;
+  width:100%;
+  height:40px;
+  border-radius: 10px;
+ 
+}
+
+.input_box input{
+  height:100%;
+  width: 100%;
+  border:none;
+  outline:none;
+  padding: 0 10px;
+  color:#333;
+  transition: all 0.2s ease ;
+  border:1.2px solid  #DCDCDC;
+  background:#FAF9F6;
+  border-radius: 2px;
+  }
+
+
+ 
+  .form-container .button{
+    background-color:#FFBF00;
+    color:white;
+    margin-top:30px;
+    width:100%;
+    padding: 10px 0;
+    border-radius:10px ;
+    border: none;
+    font-size: 15px;
+    font-weight: 450;
+
+
+  }
+  .login_signup{
+    font-size:13px;
+    text-align: center;
+    margin-top: 20px;
+
+  }
+
+  .mat-icon{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    font-size: 20px;
+    color:#707070;
+    right:7px;
+
+  }
+
+  a{
+    color:#FFBF00;
+    text-decoration: none;
+    font-size: 15px;
+
+  }
+ .input-reg{
+  margin-top: 40px;
+  
+  }
