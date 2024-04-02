@@ -28,6 +28,8 @@ public class User implements UserDetails {
     private String lastname;
     private String email;
     private String password;
+    @OneToMany
+    private List<Ticket> tickets;
 
     @Enumerated(EnumType.STRING)
     private Role role;
