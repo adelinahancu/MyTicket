@@ -1,8 +1,76 @@
+@import "bootstrap-icons/font/bootstrap-icons.css";
 .navbar-brand{
     color:#FFBF00 ;
     font-weight: bold;
 }
 
-nav{
+.custom-bg{
+    background-color:  white;
+    
+}
+.bg-customized{
+    color:black;
+}
+.navbar-brand{
+    margin-left: 5px;
+}
+
+.user-actions {
+    width: fit-content;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.user-actions img {
+    margin-right: 3px;
+}
+
+.user-actions {
+    text-decoration: none;
+}
+  
+.user-actions:hover {
+    color: #D6D6D4;
+}
+
+.subclass {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.user-actions :hover {
+    filter: grayscale(70%);
+}
+
+.user-actions::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 4px;
+    bottom: -10px;
+    left: 0;
     background-color: #FFBF00;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+  
+.user-actions:hover::before {
+    transform: scaleX(1);
+}
+
+.user-actions.clicked .subclass{
+    filter: grayscale(100%);
+    color: #D6D6D4;
+  }
+
+.first-name {
+    font-size: 20px;
+}
+
+.navbar {
+    height: 70px;
 }

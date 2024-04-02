@@ -32,6 +32,8 @@ function passwordMatchValidator(controlName:string):ValidatorFn{
 export class RegistrationComponent {
 
   user:User=new User();
+  isNavbarExpanded=false;
+ 
   
 
   hide=true;
@@ -56,7 +58,11 @@ export class RegistrationComponent {
 
   }
 
-
+   onNavbarExpanded(isExpanded: boolean): void {
+    this.isNavbarExpanded = isExpanded;
+  }
+ 
+  
   register(){
     console.log("User: ",this.user);
     this.userService.register(this.user).subscribe(

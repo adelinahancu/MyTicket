@@ -8,6 +8,7 @@ import { User } from '../model/user.model';
   providedIn: 'root'
 })
 export class UserService {
+ 
 
   private baseUrl="http://localhost:8080/api/v1/auth"
 
@@ -40,10 +41,7 @@ export class UserService {
     return this.http.put<User>(`${this.baseUrl}/updateUser`,user, {headers});
   }
 
-  verifyToken():Observable<any>{
-    const token=localStorage.getItem('ACCESS_TOKEN');
-    return this.http.post<any>(`${this.baseUrl}/verifytoken`,token);
-  }
+  
   refreshToken(): Observable<any> {
     const refreshToken = localStorage.getItem('refresh_token');
     return this.http.post<any>(`${this.baseUrl}/refresh-token`, { refreshToken })
@@ -59,6 +57,8 @@ export class UserService {
     const headers=new HttpHeaders().set('Authoziation','Bearer ' +token);
     return this.http.post<any>(`${this.baseUrl}/logout`,null,{headers});
   }
+
+ 
 
 
 }
