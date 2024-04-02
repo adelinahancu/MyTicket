@@ -20,6 +20,7 @@ public class Location {
     private String address;
     private int capacity;
     private boolean hasSeats;
+    private String imageUrl;
 
 
 }
