@@ -1,4 +1,7 @@
 @import "bootstrap-icons/font/bootstrap-icons.css";
+.navbar{
+    height: 60px!important;
+}
 .navbar-brand{
     color:#FFBF00 ;
     font-weight: bold;
@@ -73,4 +76,19 @@
 
 .navbar {
     height: 70px;
+}
+.right-head{
+   float: right; 
+}
+
+.custom-font{
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    color:black !important;
+}
+.with-divider{
+    border-right: 1px solid lightgray;
+    padding-right: 10px; /* Adjust as needed */
+    
 }

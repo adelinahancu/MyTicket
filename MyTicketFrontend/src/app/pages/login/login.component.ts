@@ -1,21 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatTabsModule} from '@angular/material/tabs';
 import{MatInputModule} from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { UserService } from '../../services/user.service';
 import { AuthenticationRequest } from '../../model/authRequest.model';
-import { FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { NavbarComponent } from '../navbar/navbar.component';
+
 
 @Component({
+  
   selector: 'app-login',
   standalone: true,
-  imports: [MatButtonModule,MatCardModule,MatStepperModule,MatTabsModule,MatInputModule,MatIconModule,FormsModule, CommonModule,ReactiveFormsModule,NavbarComponent],
+  imports: [MatButtonModule,MatCardModule,MatInputModule,MatIconModule,FormsModule, CommonModule,ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -27,6 +26,7 @@ export class LoginComponent implements OnInit {
   showWrongCredentials = false;
   hide=true;
   isFormSubmitted=false;
+  isSuccess=true;
 
   loginForm:FormGroup=new FormGroup({
     email:new FormControl('',[Validators.required,Validators.email]),
@@ -45,10 +45,12 @@ export class LoginComponent implements OnInit {
   login():void{
     console.log("email: ", this.email);
     const authRequest= new AuthenticationRequest(this.email,this.password);
-    this.loginService.login(authRequest).subscribe((response: any) => {
+    this.loginService.login(authRequest).subscribe(response => {
       console.log('Authentication is successful:',response); 
-      localStorage.setItem("jwt",response.accesToken);
+      localStorage.setItem("ACCESS_TOKEN",response["acces_token"]);
+     
       this.showWrongCredentials = false;
+      this.router.navigateByUrl("");
     },
     (error)=>{
       console.error('Authentication failed:',error);

@@ -1,10 +1,10 @@
 import { Component,ElementRef, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 import { User } from '../../model/user.model';
 import { UserService } from '../../services/user.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from '../login/login.component';
+
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +13,7 @@ import { LoginComponent } from '../login/login.component';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent implements OnInit{
+export class NavbarComponent {
 
   user:User=new User();
   isNavbarExpanded=false;
@@ -22,19 +22,7 @@ export class NavbarComponent implements OnInit{
   
 
   constructor(private userService:UserService,private router:Router,private elementRef: ElementRef){}
-  
-  ngOnInit(): void {
-    this.userService.getUserInfo().subscribe(
-      response=>{
-        this.user=response;
-        console.log('User information fetched successfully:', this.user);
-      },
-      error=>{
-        console.error(error);
-      }
-    )
-   
-  }
+
 
 
   handleClick(){

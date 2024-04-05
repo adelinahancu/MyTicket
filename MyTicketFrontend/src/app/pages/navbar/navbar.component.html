@@ -5,28 +5,49 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" #navbarTogglerBtn (click)="toggleNavbar">
         <span class="navbar-toggler-icon"></span>
       </button>
-    <a class="navbar-brand gradient" href="/home">MyTicket
+    <a class="navbar-brand gradient" href="">MyTicket
       <i class="bi bi-ticket-detailed bg-customized"></i>
     </a>
     
-    <!-- Add the navbar toggler button for smaller screens -->
+   
     
   </div>
     <!-- Navbar content (including links) -->
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav custom-font">
      
         <li class="nav-item">
-          <a class="nav-link" href="#">Evenimente</a>
+          <a class="nav-link" href="#" style="color:black;">Evenimente</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Locatii</a>
+          <a class="nav-link" href="#" style="color:black;">Locatii</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Categorii</a>
+          <a class="nav-link" href="#" style="color:black;">Categorii</a>
         </li>
+        
+        </ul>
+        <ul class="nav navbar-nav ms-auto custom-font">
+          <li class="nav-item">
+            <a class="nav-link" href="/login" *ngIf="!isLoggedIn()">
+              <div class="d-flex align-items-center">
+                <span style="color:black;">Conecteaza-te</span>
+                <mat-icon matSuffix>person</mat-icon>
+              </div>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link with-divider" href="/login" *ngIf="isLoggedIn()">
+              <div class="d-flex align-items-center">
+                <a href="/myaccount" style="color:black; text-decoration: none;">Contul meu</a>
+                <mat-icon matSuffix>person</mat-icon>
+              </div>
+            </a>
+          </li>
+        
         <li>
-          <a class="nav-link" href="#" (click)="logout($event)" *ngIf="isLoggedIn()">Log out</a>
+          <a class="nav-link" href="#" (click)="logout($event)" *ngIf="isLoggedIn()" style="color:black;">Log out</a>
         </li>
       </ul>
       

@@ -22,13 +22,13 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class JwtService {
 
-    @Value("60000000000000000")
+    @Value("86400000")
     private long jwtExpiration;
     @Value("60480000000000000")
     private long refreshExpiration;
 
     private final UserRepo userRepo;
-    private static final String SECRET_KEY="fbc260e8fa91afcfa6d24ad95c0d43b0ca4b8b20093a8135a12aa8fa2bc05447";
+    private static final String SECRET_KEY="404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970";
     public String extractUsername(String token) {
         return extractClaim(token,Claims::getSubject);
 
