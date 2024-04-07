@@ -1,10 +1,10 @@
 import { Ticket } from "./ticket.model";
 
-export class User {
-    id:number;
+export class UserDto{
     firstname:string;
     lastname:string;
     email:string;
-    password:string;
+    role:string;
     tickets:Ticket[];
+
 }

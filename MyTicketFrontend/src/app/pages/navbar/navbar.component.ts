@@ -51,8 +51,8 @@ export class NavbarComponent {
     this.userService.logout().subscribe(
       response=>{
         console.log(response);
-        localStorage.removeItem('ACCESS_TOKEN');
-        localStorage.removeItem('REFRESH_TOKEN');
+        localStorage.removeItem('access_token');
+        
         this.router.navigate(['/login']);
     
       },
@@ -63,7 +63,7 @@ export class NavbarComponent {
   }
 
   isLoggedIn():boolean{
-    const token=localStorage.getItem('ACCESS_TOKEN');
+    const token=localStorage.getItem('access_token');
     return token!=null;
   }
 

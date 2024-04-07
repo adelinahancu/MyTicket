@@ -29,7 +29,7 @@ public class LocationService {
        Optional<Location> optionalLocation=locationRepo.findById(id);
        if(optionalLocation.isPresent()){
            Location existingLocation=optionalLocation.get();
-           existingLocation.setName(location.getName());
+           existingLocation.setLocationName(location.getLocationName());
            existingLocation.setAddress(location.getAddress());
            existingLocation.setCapacity(location.getCapacity());
            existingLocation.setHasSeats(location.isHasSeats());

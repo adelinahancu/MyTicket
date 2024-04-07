@@ -47,7 +47,8 @@ export class LoginComponent implements OnInit {
     const authRequest= new AuthenticationRequest(this.email,this.password);
     this.loginService.login(authRequest).subscribe(response => {
       console.log('Authentication is successful:',response); 
-      localStorage.setItem("ACCESS_TOKEN",response["acces_token"]);
+      console.log('Access Token:', response["access_token"]);
+      localStorage.setItem("access_token",response["access_token"]);
      
       this.showWrongCredentials = false;
       this.router.navigateByUrl("");
