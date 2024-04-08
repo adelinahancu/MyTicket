@@ -6,5 +6,6 @@ export class UserDto{
     email:string;
     role:string;
     tickets:Ticket[];
+    
 
 }

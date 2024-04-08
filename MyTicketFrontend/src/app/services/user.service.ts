@@ -38,10 +38,10 @@ export class UserService {
     return this.http.get<UserDto>(`${this.baseUrl}/getUser`, {headers});
   }
 
-  updateUserInfo(user:User):Observable<any>{
+  updateUserInfo(userDto:UserDto):Observable<any>{
     const token=localStorage.getItem('access_token');
     const headers=new HttpHeaders().set('Authorization','Bearer ' +token);
-    return this.http.put<User>(`${this.baseUrl}/updateUser`,user, {headers});
+    return this.http.put<UserDto>(`${this.baseUrl}/updateUser`,userDto, {headers});
   }
 
   verifyToken():Observable<any>{
