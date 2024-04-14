@@ -1,7 +1,9 @@
 package com.adelina.MyTicket.service;
 
 import com.adelina.MyTicket.model.Location;
+import com.adelina.MyTicket.model.Seat;
 import com.adelina.MyTicket.repo.LocationRepo;
+import com.adelina.MyTicket.repo.SeatRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class LocationService {
     private final LocationRepo locationRepo;
+    private final SeatRepo seatRepo;
 
     public Optional<Location> getLocationById(Long id){
         return locationRepo.findById(id);
@@ -21,8 +24,26 @@ public class LocationService {
         return locationRepo.findAll();
     }
 
-    public void addLocation(Location location){
+    public void addLocation(Location location,int numRows,int seatsPerRow){
+
         locationRepo.save(location);
+
+        populateSeatsForLocation(location.getId(),numRows,seatsPerRow);
+
+    }
+
+    private void populateSeatsForLocation(Long id, int numRows, int seatsPerRow) {
+        Location location=locationRepo.findById(id).orElseThrow(()->new RuntimeException("Location not found"));
+
+        for(int row=1;row<=numRows;row++){
+            for(int seatNum=1;seatNum<=seatsPerRow;seatNum++){
+                Seat seat=new Seat();
+                seat.setSeatNumber(seatNum);
+                seat.setRowNumber(row);
+                seat.setLocation(location);
+                seatRepo.save(seat);
+            }
+        }
     }
 
     public void updateLocation(Long id, Location location){

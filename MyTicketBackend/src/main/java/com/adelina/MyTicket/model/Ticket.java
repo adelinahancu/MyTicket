@@ -17,13 +17,13 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ticketId;
-
-    @ManyToOne
-    private User user;
-    @ManyToOne
-    private Event event;
-    @ManyToOne
-    private Seat seat;
+    private String eventName;
+    private int seatNumber;
+    private int rowNumber;
+    private String startHour;
+    private String location;
     private BigDecimal ticketPrice;
     private LocalDateTime purchaseDate;
+    @ManyToOne
+    private User user;
 }

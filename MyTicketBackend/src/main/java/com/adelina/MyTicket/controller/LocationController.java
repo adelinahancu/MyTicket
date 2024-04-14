@@ -2,6 +2,7 @@ package com.adelina.MyTicket.controller;
 
 import com.adelina.MyTicket.auth.MessageResponse;
 import com.adelina.MyTicket.model.Location;
+import com.adelina.MyTicket.payload.LocationRequest;
 import com.adelina.MyTicket.service.LocationService;
 
 import lombok.RequiredArgsConstructor;
@@ -11,9 +12,10 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/location")
-@CrossOrigin
+@CrossOrigin(origins="http://localhost:4200")
 public class LocationController {
     private final LocationService locationService;
+
 
     @GetMapping("/getLocation/{id}")
     public ResponseEntity<?> getLocation(@PathVariable Long id){
@@ -27,8 +29,14 @@ public class LocationController {
     }
 
     @PostMapping("/addLocation")
-    public ResponseEntity<?> addLocation(@RequestBody Location location){
-       locationService.addLocation(location);
+    public ResponseEntity<?> addLocation(@RequestBody LocationRequest locationRequest){
+       Location location=new Location();
+       location.setLocationName(locationRequest.getLocationName());
+       location.setAddress(locationRequest.getAddress());
+       location.setCapacity(locationRequest.getNumRows()*locationRequest.getSeatsPerRow());
+       location.setImageUrl(locationRequest.getImageURL());
+
+       locationService.addLocation(location,locationRequest.getNumRows(),locationRequest.getSeatsPerRow());
         return ResponseEntity.ok(new MessageResponse("Location was added successfully"));
     }
 

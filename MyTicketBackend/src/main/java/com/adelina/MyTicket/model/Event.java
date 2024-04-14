@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -24,6 +25,8 @@ public class Event {
     private String category;
     private LocalDateTime eventDate;
     private String imageUrl;
-    @OneToMany(mappedBy="event")
-    private List<Ticket> tickets;
+
+    @OneToMany(mappedBy = "event",cascade =CascadeType.ALL,orphanRemoval = true)
+    private Set<EventSeat> eventSeats;
+
 }
