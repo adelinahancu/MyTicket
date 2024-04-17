@@ -1,8 +1,11 @@
+import { Locatie } from "./location.model";
+
 export class Seat{
     id:number;
     seatNumber:number;
     rowNumber:number;
-    isTaken:boolean;
-    location:Location;
+    x:number;
+    y:number;
+    location:Locatie;
 
 }

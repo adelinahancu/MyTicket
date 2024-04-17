@@ -40,7 +40,8 @@ export class UserService {
 
   updateUserInfo(userDto:UserDto):Observable<any>{
     const token=localStorage.getItem('access_token');
-    const headers=new HttpHeaders().set('Authorization','Bearer ' +token);
+    const headers=new HttpHeaders({'Authorization': `Bearer ${token}`});
+    console.log('Request Headers:', headers);
     return this.http.put<UserDto>(`${this.baseUrl}/updateUser`,userDto, {headers});
   }
 

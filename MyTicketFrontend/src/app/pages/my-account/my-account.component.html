@@ -1,74 +1,89 @@
-<div class="container">
-   <div class="row">
-    <div class="col-md-3">
-
-<div class="sidebar"  >
-    <div class="sidebar-toggle " >
-    <i class="bi bi-person-circle " style="font-size: 40px; display: flex; align-items: center; justify-content: center; margin-top: 15px; margin-bottom: 15px;"></i>
+<div class="container" style="left: 0px; margin-top: 40px;">
     
-</div>
-    <div class="divider"></div>
-    <ul class="sidebar-menu">
-        <li (click)="showTickets()"><i class="bi bi-ticket-detailed-fill " style="margin-right: 10px; font-weight: bold;"></i><a href=javascript:void(0) (click)="showTickets()">Bilete</a></li>
-        <div class="divider" ></div>
-        <li (click)="showFavorites()"><i class="bi bi-heart-fill"style="margin-right: 10px;font-weight: bold;"></i><a href=javascript:void(0) (click)="showFavorites()">Favorite</a></li>
-        <div class="divider"></div>
-        <li (click)="showTransactionHistory()"><i class="bi bi-clock-fill "style="margin-right: 10px;font-weight: bold;"></i><a href=javascript:void(0) (click)="showTransactionHistory()">Istoric tranzactii</a></li>
-        <div class="divider"></div>
-        <li (click)="showProfile()"><i class="bi bi-person-fill"style="margin-right: 10px;font-weight: bold;"></i><a href=javascript:void(0) (click)="showProfile()">Profil</a></li>
-        <div class="divider"></div>
-        <li ><i class="bi bi-door-closed-fill "style="margin-right: 10px;font-weight: bold;"></i><a href=javascript:void(0) (click)="logout($event)">Iesi din cont</a></li>
-    </ul>
-  </div>
-</div>
-<div class="col-md-9" >
-    <div  >
-    <div *ngIf="selectedItem ==='Bilete'">
-    <h2>Bilete cumpărate</h2>
-    <!-- <ul>
+    <div class="row">
+
+        <div class="col-sm-3 col-md-6 col-lg-3">
+        <div class="sidebar">
+            <div class="sidebar-toggle ">
+                <i class="bi bi-person-circle "
+                    style="font-size: 40px; display: flex; align-items: center; justify-content: center; margin-top: 15px; margin-bottom: 15px;"></i>
+
+            </div>
+            <div class="divider"></div>
+            <ul class="sidebar-menu">
+                <li (click)="showTickets()"><i class="bi bi-ticket-detailed-fill "
+                        style="margin-right: 10px; font-weight: bold;"></i><a href=javascript:void(0)
+                        (click)="showTickets()">Bilete</a></li>
+                <div class="divider"></div>
+                <li (click)="showFavorites()"><i class="bi bi-heart-fill"
+                        style="margin-right: 10px;font-weight: bold;"></i><a href=javascript:void(0)
+                        (click)="showFavorites()">Favorite</a></li>
+                <div class="divider"></div>
+                <li (click)="showTransactionHistory()"><i class="bi bi-clock-fill "
+                        style="margin-right: 10px;font-weight: bold;"></i><a href=javascript:void(0)
+                        (click)="showTransactionHistory()">Istoric tranzactii</a></li>
+                <div class="divider"></div>
+                <li (click)="showProfile()"><i class="bi bi-person-fill"
+                        style="margin-right: 10px;font-weight: bold;"></i><a href=javascript:void(0)
+                        (click)="showProfile()">Profil</a></li>
+                <div class="divider"></div>
+                <li><i class="bi bi-door-closed-fill " style="margin-right: 10px;font-weight: bold;"></i><a
+                        href=javascript:void(0) (click)="logout($event)">Iesi din cont</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-sm-9 col-md-6 col-lg-9">
+        <div>
+            <div *ngIf="selectedItem ==='Bilete'">
+                <h2>Bilete cumpărate</h2>
+                <!-- <ul>
         <li *ngFor="let ticket of tickets">{{ticket.ticketPrice}}</li>
     </ul> -->
-    </div>
-    <div *ngIf="selectedItem === 'Favorite'">
-        <h2>Favorite</h2>
-        <!-- Display favorite items here -->
-      </div>
-
-      <div *ngIf="selectedItem === 'Istoric tranzactii'">
-        <h2>Istoric tranzactii</h2>
-        <!-- Display transaction history here -->
-      </div>
-
-      <div *ngIf="selectedItem === 'Profil'">
-        <h2>Profil</h2>
-       <div class="form-container">
-        <form [formGroup]="updateUserForm" (ngSubmit)="updateUserInfo()">
-           <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="firstName" class="label">Nume</label>
-          <input type="text" class="form-control short-input" id="lastName" formControlName="lastname"  >
-        
             </div>
-            <div class="form-group col-md-6">
-                <label for="lastName" class="label">Prenume</label>
-                <input type="text" class="form-control short-input" id="firstName" formControlName="firstname">
-              </div>
+            <div *ngIf="selectedItem === 'Favorite'">
+                <h2>Favorite</h2>
+                <!-- Display favorite items here -->
             </div>
-              <div class="form-group">
-                <label for="email" class="label">Email</label>
-                <input type="email" class="form-control short-input" id="email" formControlName="email">
-              </div>
 
-              
-                <button type="submit" class="button " [disabled]="updateUserForm.invalid">Salvează</button>
-              
+            <div *ngIf="selectedItem === 'Istoric tranzactii'">
+                <h2>Istoric tranzactii</h2>
+                <!-- Display transaction history here -->
+            </div>
 
-        </form>
-       </div>
-      </div>
+            <div *ngIf="selectedItem === 'Profil'">
+                <h2>Profil</h2>
+                <div class="form-container">
+                    <form [formGroup]="updateUserForm" (ngSubmit)="updateUserInfo()">
+                        <div class="form-row">
+                            <div class="form-group ">
+                                <label for="firstName" class="label">Nume</label>
+                                <input type="text" class="form-control short-input col-sm-6" id="lastName"
+                                    formControlName="lastname" [(ngModel)]="userDto.lastname" style="margin-right: 10px;">
+
+                            </div>
+                            <div class="form-group ">
+                                <label for="lastName" class="label">Prenume</label>
+                                <input type="text" class="form-control short-input col-sm-6" id="firstName"
+                                    formControlName="firstname" [(ngModel)]="userDto.firstname">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="label">Email</label>
+                            <input type="email" class="form-control short-input" id="email" formControlName="email" [(ngModel)]="userDto.email">
+                        </div>
 
 
+                        <button type="submit" class="button " [disabled]="updateUserForm.invalid">Salvează</button>
+
+
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
     </div>
     </div>
-</div> 
+    
 </div>

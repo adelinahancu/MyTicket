@@ -1,0 +1,36 @@
+<div class="wrap-page" *ngIf="event">
+<div class="img-item">
+    <div class="container">
+        <div class="main-img-item">
+            <picture>
+                <img [src]="event.imageUrl">
+            </picture>
+        </div>
+    </div>
+
+    <div class="event-details">
+        <h3 class="eventName">{{event.eventName}}</h3>
+        <div class="date-time-location">
+            <div class="date"><i class="bi bi-calendar2-week" style="margin-right: 5px;"></i>{{event.eventDate | date: "MMM d, y"}}</div>
+            <div class="hr"></div>
+            <div class="start-time"><i class="bi bi-clock" style="margin-right: 5px;"></i>{{event.startTime}}</div>
+            <div class="hr"></div>
+            <div class="location"><i class="bi bi-geo-alt" style="margin-right: 5px;"></i>{{event.location.locationName}}</div>
+        </div>
+<div class="button-container">
+    <button type="button" class="custom-button col-md-6" (click)="buyTicket()">Cumpara bilet</button>
+</div>
+
+      
+    </div>
+</div>
+
+<div class="event-description">
+    <p>{{event.description}}</p>
+    
+    <br>
+
+    <p>Categorie: {{event.category}}</p>
+</div>
+
+</div>

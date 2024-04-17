@@ -16,11 +16,12 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 })
 export class MyAccountComponent implements OnInit {
 
-  userDto:UserDto;
+  userDto:UserDto=new UserDto();
   user:User;
   tickets: Ticket[];
   selectedItem:string;
   updateUserForm:FormGroup;
+  isSuccessful=false;
 
   constructor(private userService:UserService,private router:Router,private formBuilder:FormBuilder){}
 

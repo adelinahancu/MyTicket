@@ -1,0 +1,21 @@
+<div class="seats-container">
+
+ 
+    
+    <svg width="800" height="400" class="seat-svg">
+     <!--<image [attr.href]="'assets/images/scena1.png'" width="800" height="500" />-->   
+     
+
+
+      <ng-container *ngFor="let seat of seats">
+        <rect
+          [attr.x]="seat.x"
+          [attr.y]="seat.y"
+          [attr.rx]="5"
+          [attr.ry]="5"
+          width="30"
+          height="30"
+        ></rect>
+      </ng-container>
+    </svg>
+  </div>

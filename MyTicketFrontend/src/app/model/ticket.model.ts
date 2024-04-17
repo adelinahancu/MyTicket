@@ -1,14 +1,17 @@
-import { Event } from "./event.model";
+import { Eveniment } from "./eveniment.model";
+import { Locatie } from "./location.model";
 import { Seat } from "./seat.model";
 import { User } from "./user.model";
 
 export class Ticket{
     ticketId:number;
     user:User;
-    event:Event;
+    event:Eveniment;
     seat:Seat;
+    location:Locatie;
     ticketPrice:number;
-    purchaseDate:string;
+    purchaseDate:Date;
+    isBooked:boolean;
 
 
 

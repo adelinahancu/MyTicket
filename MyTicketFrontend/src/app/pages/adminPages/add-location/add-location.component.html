@@ -1,1 +1,90 @@
-<p>add-location works!</p>
+<div class="container">
+    <div class="row">
+      <!-- Dashboard Component Column (col-lg-3) -->
+      <div class="col-lg-2">
+        <app-dashboard></app-dashboard>
+      </div>
+  
+      <!-- Form Section Column (col-lg-9) -->
+      <div class="col-lg-10">
+        
+        <h2 class="text-center">Adaugă o locație nouă</h2>
+  
+        <!-- Form with FormGroup binding -->
+        <form [formGroup]="addLocationForm" (ngSubmit)="addLocation()">
+          <!-- First Column of Inputs -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+            
+                <input type="text" class="form-control" id="locationName" placeholder="Numele locației"
+                       [(ngModel)]="newLocation.locationName" formControlName="locationName">
+              </div>
+  
+              <div class="form-group">
+              
+                <input type="text" class="form-control" id="address" placeholder="Adresa"
+                       [(ngModel)]="newLocation.address" formControlName="address">
+              </div>
+            </div>
+  
+            <!-- Second Column of Inputs -->
+            <div class="col-md-6">
+              <div class="form-group">
+                
+                <input type="text" class="form-control" id="capacity" placeholder="Capacitatea"
+                       [(ngModel)]="newLocation.capacity" formControlName="capacity">
+              </div>
+              <div class="form-group">
+                
+                <input type="text" class="form-control" id="imageUrl" placeholder="URL"
+                       [(ngModel)]="newLocation.imageUrl" formControlName="imageUrl">
+              </div>
+  
+              
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              
+
+              <div class="form-group ">
+                <label >
+                  Are scaune?
+                  <input type="checkbox" class="ml-2" [(ngModel)]="newLocation.hasSeats" formControlName="hasSeats">
+                </label>
+              </div>
+
+              <div class="col-md-6"></div>
+            </div>
+            </div>
+          </div>
+  
+          <!-- Button Section -->
+          <div class="text-right mt-3">
+            <button type="submit" class="btn ">Adaugă locație</button>
+          </div>
+        </form>
+
+        <div class="location-cards-container">
+            <mat-card *ngFor="let location of locations" class="example-card">
+              <div class="card-image-container">
+                <div class="rounded-image">
+                  <img [src]="location.imageUrl || 'https://via.placeholder.com/300x400'" alt="Location Image">
+                </div>
+              </div>
+              <mat-card-content>
+                <h3 style="margin-bottom: 0px; margin-top: 8px;">{{ location.locationName }}</h3>
+                <p><i class="bi bi-geo-alt-fill" style="color:black"></i> {{ location.address }}</p>
+              </mat-card-content>
+              <!-- Optional: Add actions like buttons (e.g., for editing or viewing details) -->
+             
+            </mat-card>
+          </div>
+
+       
+      </div>
+    </div>
+    
+  </div>
+  

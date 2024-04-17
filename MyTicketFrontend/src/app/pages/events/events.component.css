@@ -1,51 +1,4 @@
-
-form{
-
-  margin-bottom: 30px;
-  margin-left:50px;
-
-}
-  
-  .form-group{
-    margin-bottom: 25px;
-    height:40px;
-    
-
-    
-  }
-
-  .form-group input{
-    height:100%;
-  width: 100%;
-  border:none;
-  outline:none;
-  padding: 0 10px;
-  color:#333;
-  transition: all 0.2s ease ;
-  border:1.2px solid  #DCDCDC;
-  background:#FAF9F6;
-  border-radius: 2px;
-  }
-
-  h2{
-    font-family: 'Roboto',Arial, Helvetica, sans-serif;
-    margin-top:80px;
-    margin-bottom: 50px;
-  }
-
-  label{
-    font-size: 15px;
-    margin-left:5px;
-    align-items: center;
-  }
-
-  button{
-    background-color: #FFBF00;
-    margin: top 0px, !important;
-    font-weight: 500;
-  }
-
-  .example-card {
+.example-card {
     
     
     border-radius: 13px!important;
@@ -60,7 +13,7 @@ form{
     border-top: 200px;
 
   }
-  .locations-container{
+  .events-container{
     margin-top: 70px;
     align-items: center;
     display:flex;
@@ -96,7 +49,7 @@ p{
   overflow: hidden;
 }
 
-.location-cards-container {
+.events-cards-container {
     display: flex; /* Use Flexbox layout */
     flex-wrap: wrap;
     justify-content: center;

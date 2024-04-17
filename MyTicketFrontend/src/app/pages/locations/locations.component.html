@@ -1,0 +1,18 @@
+<div class="locations-container">
+  <h2>Locații</h2>
+  <div class="location-cards-container">
+    <mat-card *ngFor="let location of locations" class="example-card">
+      <div class="card-image-container">
+        <div class="rounded-image">
+          <img [src]="location.imageUrl || 'https://via.placeholder.com/300x400'" alt="Location Image">
+        </div>
+      </div>
+      <mat-card-content>
+        <h3 style="margin-bottom: 0px; margin-top: 8px;">{{ location.locationName }}</h3>
+        <p><i class="bi bi-geo-alt-fill" style="color:black"></i> {{ location.address }}</p>
+      </mat-card-content>
+      <!-- Optional: Add actions like buttons (e.g., for editing or viewing details) -->
+     
+    </mat-card>
+  </div>
+</div>

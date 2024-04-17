@@ -1,0 +1,14 @@
+rect{
+    fill: #ffb00f!important;
+   
+    border-radius: 5px;
+
+}
+
+.seats-container{
+    padding-top:200px;
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center;
+   
+}
