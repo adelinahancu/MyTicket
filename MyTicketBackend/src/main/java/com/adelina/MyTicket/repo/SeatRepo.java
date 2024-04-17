@@ -1,5 +1,6 @@
 package com.adelina.MyTicket.repo;
 
+import com.adelina.MyTicket.model.Event;
 import com.adelina.MyTicket.model.Location;
 import com.adelina.MyTicket.model.Seat;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,6 +14,8 @@ public interface SeatRepo extends JpaRepository<Seat,Long> {
 
 
     List<Seat> findByLocation(Location location);
+
+    Seat findByLocationAndSeatNumber(Location location, int seatNumber);
 
 
 }

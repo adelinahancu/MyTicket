@@ -5,13 +5,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name="Locations")
 public class Location {
 
     @Id
@@ -23,15 +26,12 @@ public class Location {
     private boolean hasSeats;
     private String imageUrl;
 
-    @OneToMany(mappedBy="location")
-    private List<Seat> seats;
-
+    @OneToMany(mappedBy = "location")
+    private Set<Seat> seats;
     @OneToMany
     private List<Event> events;
 
-    public boolean hasSeats() {
-        return seats != null && !seats.isEmpty();
-    }
+
 
 
 

@@ -11,17 +11,22 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name="Seats")
 public class Seat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int seatNumber;
     private int rowNumber;
+    private int x;
+    private int y;
+
+
     @ManyToOne
+    @JoinColumn(name = "location_id")
     private Location location;
 
-    @OneToMany(mappedBy = "seat",cascade = CascadeType.ALL,orphanRemoval = true)
-    private Set<EventSeat> eventSeats;
+
 
 
 }

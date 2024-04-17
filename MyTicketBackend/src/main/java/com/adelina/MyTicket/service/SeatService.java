@@ -14,22 +14,13 @@ import java.util.List;
 public class SeatService {
 
     private final SeatRepo seatRepo;
-    private final LocationRepo locationRepo;
 
-    public void populateSeatsForLocation(Long locationId,int numRows,int seatsPerRow){
-        Location location=locationRepo.findById(locationId)
-                .orElseThrow(()->new RuntimeException("Location not found with id:"+locationId));
 
-        for(int row=1;row<=numRows;row++){
-            for(int seatNum=1;seatNum<= seatsPerRow;seatNum++){
-                Seat seat=new Seat();
-                seat.setSeatNumber(seatNum);
-                seat.setRowNumber(row);
-                seat.setLocation(location);
-                seatRepo.save(seat);
-            }
-        }
-    }
+
+  public List<Seat> getAllSeatsForLocation(Location location){
+
+      return seatRepo.findByLocation(location);
+  }
 
 
 }

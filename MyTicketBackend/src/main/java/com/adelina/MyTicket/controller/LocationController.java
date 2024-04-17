@@ -29,14 +29,10 @@ public class LocationController {
     }
 
     @PostMapping("/addLocation")
-    public ResponseEntity<?> addLocation(@RequestBody LocationRequest locationRequest){
-       Location location=new Location();
-       location.setLocationName(locationRequest.getLocationName());
-       location.setAddress(locationRequest.getAddress());
-       location.setCapacity(locationRequest.getNumRows()*locationRequest.getSeatsPerRow());
-       location.setImageUrl(locationRequest.getImageURL());
+    public ResponseEntity<?> addLocation(@RequestBody Location location){
 
-       locationService.addLocation(location,locationRequest.getNumRows(),locationRequest.getSeatsPerRow());
+
+       locationService.addLocation(location);
         return ResponseEntity.ok(new MessageResponse("Location was added successfully"));
     }
 

@@ -16,35 +16,23 @@ public class LocationService {
     private final LocationRepo locationRepo;
     private final SeatRepo seatRepo;
 
-    public Optional<Location> getLocationById(Long id){
-        return locationRepo.findById(id);
+    public Location getLocationById(Long id){
+        return locationRepo.findById(id).orElseThrow();
     }
 
     public List<Location> getAllLocations(){
         return locationRepo.findAll();
     }
 
-    public void addLocation(Location location,int numRows,int seatsPerRow){
+    public void addLocation(Location location){
 
         locationRepo.save(location);
 
-        populateSeatsForLocation(location.getId(),numRows,seatsPerRow);
+
 
     }
 
-    private void populateSeatsForLocation(Long id, int numRows, int seatsPerRow) {
-        Location location=locationRepo.findById(id).orElseThrow(()->new RuntimeException("Location not found"));
 
-        for(int row=1;row<=numRows;row++){
-            for(int seatNum=1;seatNum<=seatsPerRow;seatNum++){
-                Seat seat=new Seat();
-                seat.setSeatNumber(seatNum);
-                seat.setRowNumber(row);
-                seat.setLocation(location);
-                seatRepo.save(seat);
-            }
-        }
-    }
 
     public void updateLocation(Long id, Location location){
        Optional<Location> optionalLocation=locationRepo.findById(id);

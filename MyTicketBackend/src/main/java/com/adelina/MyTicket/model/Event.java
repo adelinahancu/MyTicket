@@ -24,9 +24,9 @@ public class Event {
     private Location location;
     private String category;
     private LocalDateTime eventDate;
+    private String startTime;
+    private String endTime;
     private String imageUrl;
 
-    @OneToMany(mappedBy = "event",cascade =CascadeType.ALL,orphanRemoval = true)
-    private Set<EventSeat> eventSeats;
 
 }

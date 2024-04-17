@@ -1,6 +1,7 @@
 package com.adelina.MyTicket.repo;
 
 import com.adelina.MyTicket.model.Event;
+import com.adelina.MyTicket.model.Location;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,6 +13,5 @@ import java.util.List;
 @Repository
 public interface EventRepo extends JpaRepository<Event,Integer> {
 
-    @Query("SELECT COUNT(e) FROM Event e WHERE e.location.id = :locationId AND e.eventDate >= :currentDate")
-    int countEventsByLocationAfterDate(@Param("locationId") int locationId, @Param("currentDate") LocalDateTime currentDate);
+
 }
