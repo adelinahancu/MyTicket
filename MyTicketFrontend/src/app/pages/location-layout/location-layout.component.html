@@ -1,21 +1,75 @@
-<div class="seats-container">
+<div class="wrapper">
 
- 
-    
-    <svg width="800" height="400" class="seat-svg">
-     <!--<image [attr.href]="'assets/images/scena1.png'" width="800" height="500" />-->   
-     
+    <div class="event_name  ">{{event?.eventName}}</div>
+    <div class="event_date"> {{event?.eventDate  | date: "MMMM d"}},<span>{{ event?.startTime }}</span></div>
+  
+    <div class="row">
+        
+        <div class="col-md-12 clearfix">
+            <div class="ticket_order_step">
+                <div  class="col-lg-4 first_step active">
+                    <a>
+                        <span>1.</span>
+                        <span>Data și locul</span>
+                    </a>
+                </div>
+                <div click="stepTwo" class="col-lg-4 second_step ">
+                    <a>
+                        <span>2.</span>
+                        <span>Plata</span>
+                    </a>
+                </div>
+                <div class="col-lg-4 third_step">
+                    <a>
+                        <span>3.</span>
+                        <span>Finalizat</span>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+   
+    <div class="status-container">
+        <div class="status-item disponibil">
+            <div class="status-rectangle"></div>
+            <span>disponibil</span>
+        </div>
+        <div class="status-item indisponibil">
+            <div class="status-rectangle"></div>
+            <span>indisponibil</span>
+        </div>
+    </div>
+   
+    <div class="seats-container">
+        <div class="scene"><h3>Scena</h3></div>
+        <svg width="800" height="300" class="seat-svg">
+            <!--<image [attr.href]="'assets/images/scena1.png'" width="800" height="500" />-->
 
 
-      <ng-container *ngFor="let seat of seats">
-        <rect
-          [attr.x]="seat.x"
-          [attr.y]="seat.y"
-          [attr.rx]="5"
-          [attr.ry]="5"
-          width="30"
-          height="30"
-        ></rect>
-      </ng-container>
-    </svg>
+
+            <ng-container *ngFor="let seat of seats">
+                <rect [attr.x]="seat.x" [attr.y]="seat.y" [attr.rx]="5" [attr.ry]="5" width="30" height="30"
+                    (click)="onSeatSelected(seat)"
+                    [ngClass]="{ 'booked': !seatAvailability[seat.id], 'available': seatAvailability[seat.id],'unavailable-seat': seatAvailability[seat.id],'available-seat': !seatAvailability[seat.id]  }"></rect>
+            </ng-container>
+        </svg>
+
+    </div>
+
+    <div class="seat-details" *ngFor="let seat of selectedSeat">
+        <div class="seat-info">
+        <div>Rând: {{ seat.rowNumber }}</div>
+        <div>Număr loc: {{ seat.seatNumber }}</div>
+    </div>
+    <div class="event-date" style="font-size: 15px;">{{ event?.eventDate | date: "MMMM d" }}</div>
+    <i class="bi bi-x close-icon"></i>
   </div>
+
+    <div class="button-container">
+        <button  class="reserve-button">Rezerveaza</button>
+    </div>
+      
+
+</div>

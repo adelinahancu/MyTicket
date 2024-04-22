@@ -1,14 +1,269 @@
 rect{
-    fill: #ffb00f!important;
+    
    
     border-radius: 5px;
 
 }
 
 .seats-container{
-    padding-top:200px;
-    display: flex;
+    padding-top:0px;
+    display: block;
     justify-content: center; /* Horizontally center */
     align-items: center;
+    position:relative;
    
+}
+
+.booked {
+    fill: #FFBF00;
+  }
+  
+  .available {
+    fill: #dddddd;
+  }
+
+ 
+  .reserve-button {
+    padding: 10px; 
+    font-size: 18px;
+    color:white;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    
+    background-color: #FFBF00;
+    border: none;
+    border-radius: 10px;
+    width: 200px;
+    height: 60px;
+  }
+
+  .button-container{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+
+
+
+  .wrapper{
+    margin-top: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left:20px;
+   margin-right:20px;
+   
+  }
+  
+  .status-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0px; /* Adjust margin between status-container and seats-container */
+    font-size: 15px;
+    font-weight: 450;
+    margin-top:20px;
+}
+
+.status-item {
+    display: flex;
+    
+    align-items: center;
+    margin: 0 20px; /* Adjust margin between status items */
+}
+
+.status-rectangle {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    margin-bottom: 5px; 
+    margin-right: 5px;
+}
+
+
+
+.disponibil .status-rectangle {
+    background-color: #FFBF00;
+   
+}
+.indisponibil .status-rectangle {
+    background-color: #dddddd;
+    
+}
+.event_name{
+    font-size:30px;
+    font-family: 'Roboto',sans-serif;
+    font-weight: 450;
+    margin-bottom: 20px;
+}
+
+.ticket_order_step{
+    cursor: pointer;
+}
+
+.ticket_order_step {
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    width: 900px;
+  
+}
+
+.ticket_order_step>div {
+    letter-spacing: normal;
+    text-align: center;
+    box-sizing: border-box;
+    border: 1px solid #dadada;
+    color: #404040;
+    padding: 13px 12px;
+    font-family: Roboto Regular,Helvetica,Arial,sans-serif;
+    font-size: 18px;
+    line-height: 22px;
+    background-color: #fff
+}
+
+.ticket_order_step>div a {
+    color: #404040;
+    letter-spacing: normal!important
+}
+
+.ticket_order_step>div span:first-child {
+    font-family: Roboto Bold,Helvetica,Arial,sans-serif
+}
+
+.ticket_order_step>div.active {
+    color: #fff;
+    background-color: #FFBF00;
+    border: 1px solid #FFBF00
+}
+
+.ticket_order_step>div.active a {
+    color: #fff
+}
+
+.ticket_order_step .first_step {
+    border-radius: 5px 0 0 5px;
+    border-right: 0
+}
+
+.ticket_order_step .second_step {
+    border-left: 0
+}
+
+.ticket_order_step .third_step {
+    border-radius: 0 5px 5px 0;
+    border-left: 0
+}
+
+.event_name{
+    display:flex;
+    align-items: center;
+    
+}
+
+.event_date{
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: 400;
+   
+}
+
+.event_date span{
+    margin-left: 5px;
+}
+
+.unavailable-seat {
+    cursor: not-allowed; /* Set cursor style to not-allowed */
+  }
+
+  .unavailable-seat:hover {
+    opacity: 0.8; /* Example: Reduce opacity for visual feedback */
+  }
+
+  .available-seat{
+    cursor:pointer;
+  }
+
+  .scene {
+      height: 60px;
+      width: 420px;
+      
+      
+      
+      margin-left: 180px;
+  }
+  .scene {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    perspective: 100px;
+    margin-top: 30px;
+    background: linear-gradient(45deg, #333, #666); /* Add gradient background */
+  padding: 20px; /* Add padding for text */
+  border-radius: 8px; /* Add border radius for rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transform-style: preserve-3d; /* Preserve 3D transformations */
+  transform: rotateX(40deg); /* Apply X-axis rotation */
+   
+  }
+  
+  .scene h3 {
+    margin-top: 0px;
+
+   
+   font-size: 30px;
+   color: whitesmoke; /* Set text color */
+   font-weight: 500;
+  text-transform: uppercase; /* Transform text to uppercase */
+  letter-spacing: 2px; /* Add letter spacing */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add text shadow for depth */
+   /* Preserve 3D transformations */
+
+  letter-spacing: 8px;
+  
+  }
+
+ .seat-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Vertical spacing between elements */
+    margin-top: 10px; /* Optional: Adjust top margin */
+    width:400px;
+    height:70px;
+    background-color:#dfdfdf;
+    border-radius: 10px;
+    font-size: 19px;
+    margin-bottom: 10px;
+    position:relative;
+}
+
+.seat-info {
+    display: flex;
+    flex-direction: row;
+    margin-left:10px;
+    margin-top: 7px;
+}
+
+.event-date{
+    margin-left: 10px;
+
+}
+
+.seat-info > div {
+    margin-right: 20px; /* Spacing between seat details */
+}
+
+
+
+.close-icon {
+    margin-right: auto; /* Push the close icon to the right */
+    cursor: pointer; /* Show pointer cursor on hover */
+    color: black; /* Optionally, set the color for the close icon */
+    font-size: 1.4rem; /* Optionally, adjust the icon size */
+    font-weight: 500;
+    position:absolute;
+    top:5px;
+    right: 5px;
+
 }

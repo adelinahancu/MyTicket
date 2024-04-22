@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,22 +32,34 @@ public class TicketService {
 
     }
 
-    public void reserveTicket(Event event, Seat seat) {
+    public List<Ticket> ticketsForEvent(int eventId){
+        return ticketRepository.findByEventId(eventId);
+    }
 
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Optional<User> optionalUser = userRepo.findByEmail(userDetails.getUsername());
-        if (optionalUser.isPresent()) {
-            User user=optionalUser.get();
+    public Ticket reserveTicket(Event event, Seat seat) {
 
-            Ticket ticket = new Ticket();
-            ticket.setUser(user);
-            ticket.setEvent(event);
-            ticket.setSeat(seat);
-            ticket.setBooked(true);
-            ticket.setPurchaseDate(LocalDateTime.now());
-            ticketRepository.save(ticket);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
+        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
+
+
+            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            Optional<User> optionalUser = userRepo.findByEmail(userDetails.getUsername());
+            if (optionalUser.isPresent()) {
+                User user = optionalUser.get();
+
+                Ticket ticket = new Ticket();
+                ticket.setUser(user);
+                ticket.setEvent(event);
+                ticket.setSeat(seat);
+                ticket.setBooked(true);
+                ticket.setPurchaseDate(LocalDateTime.now());
+                ticketRepository.save(ticket);
+                return ticket;
+            }
         }
+
+        return null;
     }
 
 }

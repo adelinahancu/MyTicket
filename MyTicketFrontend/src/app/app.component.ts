@@ -15,4 +15,6 @@ import { NavbarComponent } from './pages/navbar/navbar.component';
 })
 export class AppComponent {
   title = 'MyTicketFront';
+
+
 }
