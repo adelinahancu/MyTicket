@@ -26,6 +26,7 @@ public class Event {
     private LocalDateTime eventDate;
     private String startTime;
     private String endTime;
+    private int ticketPrice;
     private String imageUrl;
 
 

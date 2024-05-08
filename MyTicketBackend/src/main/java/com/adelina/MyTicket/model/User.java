@@ -12,7 +12,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 @Data
 @Builder
@@ -28,15 +30,20 @@ public class User implements UserDetails {
     private String lastname;
     private String email;
     private String password;
-    @OneToMany
+    @OneToMany(fetch=FetchType.LAZY)
     private List<Ticket> tickets;
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    public User(Long id, String firstname, String lastname, String email, String password) {
+
+    }
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority((role.name())));
+        return Collections.singleton(new SimpleGrantedAuthority(role.name()));
     }
     @Override
     public String getPassword() {
@@ -46,6 +53,9 @@ public class User implements UserDetails {
     @Override
     public String getUsername() {
         return email;
+    }
+    public static User build(User user){
+        return new User(user.getId(),user.getFirstname(), user.getLastname(), user.getEmail(), user.getPassword());
     }
 
     @Override
@@ -67,4 +77,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
 }

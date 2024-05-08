@@ -1,48 +1,40 @@
 package com.adelina.MyTicket.controller;
 
+import com.adelina.MyTicket.auth.AuthenticationRequest;
+import com.adelina.MyTicket.auth.MessageResponse;
 import com.adelina.MyTicket.config.JwtService;
 import com.adelina.MyTicket.model.Event;
 import com.adelina.MyTicket.model.Seat;
 import com.adelina.MyTicket.model.Ticket;
+import com.adelina.MyTicket.payload.MultipleTicketsRequest;
 import com.adelina.MyTicket.payload.TicketRequest;
 import com.adelina.MyTicket.service.TicketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/ticket")
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
 public class TicketController {
 
     private final TicketService ticketService;
 
     @PostMapping("/reserve")
-    public ResponseEntity<Ticket> reserveTicket(@RequestBody TicketRequest ticketRequest) {
-        try {
-            // Extract event and seat details from TicketRequest
-            Event event = ticketRequest.getEvent();
-            Seat seat = ticketRequest.getSeat();
-
-            // Validate if seat is available (you can implement this logic)
-            boolean isSeatAvailable = ticketService.isSeatAvailableForEvent(event, seat);
-
-            if (isSeatAvailable) {
-                // Create a new Ticket entity
-                Ticket reservedTicket = ticketService.reserveTicket(event, seat);
-                return ResponseEntity.ok(reservedTicket); // Return the reserved ticket
-            } else {
-                return ResponseEntity.badRequest().body(null); // Seat is already booked or unavailable
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null); // Handle any exceptions
-        }
+    public ResponseEntity<?> reserveTicket(@RequestBody MultipleTicketsRequest ticketRequest) {
+        List<Ticket> reservedTickets = ticketService.reserveTickets(ticketRequest);
+        if (reservedTickets.isEmpty())
+            return ResponseEntity.badRequest().body(new MessageResponse("Empty"));
+        return ResponseEntity.ok(reservedTickets);
     }
 
     @GetMapping("/allTickets/{eventId}")
-    public ResponseEntity<?> getAllTickets(@PathVariable int eventId){
+    public ResponseEntity<?> getAllTickets(@PathVariable int eventId) {
         return ResponseEntity.ok(ticketService.ticketsForEvent(eventId));
     }
 
