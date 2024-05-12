@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LocationService } from '../../services/location.service';
 import { CommonModule, DatePipe } from '@angular/common';
 import { Seat } from '../../model/seat.model';
@@ -33,8 +33,9 @@ export class LocationLayoutComponent implements OnInit {
   tickets:Ticket[]=[];
   ticketRequest:TicketRequest;
   seatAvailability: { [key: number]: boolean } = {};
+  totalAmountToPay:number=0;
 
-  constructor(private route:ActivatedRoute,private eventService:EventService,private ticketService:TicketService){
+  constructor(private route:ActivatedRoute,private eventService:EventService,private ticketService:TicketService,private router:Router){
 
  }
 
@@ -79,34 +80,7 @@ getEventDetails():void{
       console.error('Error fetching seats:', error);
     });
   }
-/*
-  reserveTicket(): void {
-    if (this.event && this.selectedSeat) {
-      const ticketRequest: TicketRequest = {
-        event: this.event,
-        
-      };
-      console.log('Sending ticket request:', ticketRequest);
-      this.ticketService.reserveTicket(ticketRequest)
-        .subscribe(
-          (response: any ) => {
-            if (response) {
-              console.log('Ticket reserved successfully:', response);
-              // Optionally, reset selectedSeat after successful reservation
-              
-            } else {
-              console.error('Failed to reserve ticket: Invalid response');
-            }
-          },
-          (error) => {
-            console.error('Failed to reserve ticket:', error);
-          }
-        );
-    } else {
-      console.error('Event or selected seat is undefined');
-    }
-  }
-*/
+
   getTickets():void{
     this.ticketService.getTicketsForEvent(this.eventId).subscribe(tickets=>{
       this.tickets=tickets;
@@ -157,6 +131,41 @@ getEventDetails():void{
     } else {
       // Seat is already selected, remove it from the selectedSeats array
       this.selectedSeat.splice(index, 1);
+     
+    }
+    this.calculateTotalAmountToPay();
+  }
+
+  isSeatSelected(seat: Seat): boolean {
+    // Check if the seat is selected
+    return this.selectedSeat.some(s => s.id === seat.id);
+  }
+
+  calculateTotalAmountToPay():void{
+    const ticketPrice=this.event?.ticketPrice || 0;
+    this.totalAmountToPay=this.selectedSeat.length*ticketPrice;
+  }
+
+  removeSeat(seat: Seat): void {
+    this.selectedSeat = this.selectedSeat.filter(s => s !== seat);
+    this.updateTotalAmountToPay();
+  }
+  updateTotalAmountToPay() {
+    this.totalAmountToPay = this.selectedSeat.reduce((sum, seat) => sum + this.event!.ticketPrice, 0);
+  }
+
+  navigateToPayment(totalAmountToPay: number, event: Eveniment, selectedSeat: Seat[]) {
+    if (event && selectedSeat && selectedSeat.length > 0) {
+      this.router.navigate(['/payment'], {
+        state: {
+          totalAmountToPay: totalAmountToPay,
+          event: event,
+          selectedSeat: selectedSeat
+        }
+      });
+    } else {
+      console.error('Event or selected seats are null or empty.');
+     
     }
   }
 

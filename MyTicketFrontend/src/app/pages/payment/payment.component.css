@@ -1,0 +1,161 @@
+.container{
+    font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding:25px;
+  min-height: 100vh;
+  margin: 0 auto;
+  margin-top: 10px;
+
+}
+
+.container form{
+  padding:20px;
+  width:700px;
+  background: #fff;
+  box-shadow: 0 5px 10px rgba(0,0,0,.1);
+}
+
+.container form .row{
+  display: flex;
+  flex-wrap: wrap;
+  gap:15px;
+}
+
+.container form .row .col{
+  flex:1 1 250px;
+}
+
+.container form .row .col .title{
+  font-size: 20px;
+  color:#333;
+  padding-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.container form .row .col .input-group{
+  margin-top:15px;
+}
+
+.container form .row .col .input-group span{
+  margin-bottom: 10px;
+  display: block;
+}
+
+.container form .row .col .input-group input{
+  width: 100%;
+  border:1px solid #ccc;
+  padding:10px 15px;
+  font-size: 15px;
+  text-transform: none;
+}
+
+.container form .row .col .input-group select{
+    width: 100%;
+    border:1px solid #ccc;
+    padding:10px 15px;
+    font-size: 15px;
+    text-transform: none;
+  }
+
+.container form .row .col .input-group input:focus{
+  border:1px solid #000;
+}
+
+.container form .row .col .flex{
+  display: flex;
+  gap:15px;
+}
+
+.container form .row .col .flex .input-group{
+  margin-top: 5px;
+}
+
+.container form .row .col .input-group img{
+  height: 34px;
+  margin-top: 5px;
+  filter: drop-shadow(0 0 1px #000);
+}
+
+.container form .submit-btn{
+  width: 100%;
+  padding:12px;
+  font-size: 17px;
+  background:  #FFBF00;
+  color:#fff;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.container form .submit-btn:hover{
+  background: #2ecc71;
+}
+
+.ticket_order_step{
+    cursor: pointer;
+    margin-top: 80px;;
+}
+
+.ticket_order_step {
+  
+    display: flex;
+    align-items: center;
+    width: 900px;
+  
+}
+
+.ticket_order_step>div {
+    letter-spacing: normal;
+    text-align: center;
+    box-sizing: border-box;
+    border: 1px solid #dadada;
+    color: #404040;
+    padding: 13px 12px;
+    font-family: Roboto Regular,Helvetica,Arial,sans-serif;
+    font-size: 18px;
+    line-height: 22px;
+    background-color: #fff
+}
+
+.ticket_order_step>div a {
+    color: #404040;
+    letter-spacing: normal!important
+}
+
+.ticket_order_step>div span:first-child {
+    font-family: Roboto Bold,Helvetica,Arial,sans-serif
+}
+
+.ticket_order_step>div.active {
+    color: #fff;
+    background-color: #FFBF00;
+    border: 1px solid #FFBF00
+}
+
+.ticket_order_step>div.active a {
+    color: #fff
+}
+
+.ticket_order_step .first_step {
+    border-radius: 5px 0 0 5px;
+    border-right: 0
+}
+
+.ticket_order_step .second_step {
+    border-left: 0
+}
+
+.ticket_order_step .third_step {
+    border-radius: 0 5px 5px 0;
+    border-left: 0
+}
+.wrapper{
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left:20px;
+   margin-right:20px;
+   
+  }

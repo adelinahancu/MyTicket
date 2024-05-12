@@ -30,8 +30,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 
@@ -107,7 +109,34 @@ public class TicketService {
     }
 
 
+    public List<Ticket> findTicketsByUserId(Long userId){
+        return ticketRepository.findTicketsByUserId(userId);
 
+    }
+
+    public List<Ticket> findTicketsByUserEmail(String email){
+        return ticketRepository.findTicketsByUserEmail(email);
+    }
+
+    public Ticket findTicketById(int ticketId){
+        return ticketRepository.findTicketByTicketId(ticketId);
+    }
+
+    public long getTicketsSoldForCurrentMonth(){
+        YearMonth currentMonth=YearMonth.now();
+        LocalDateTime startOfMonth=currentMonth.atDay(1).atStartOfDay();
+        LocalDateTime endOfMonth=currentMonth.plusMonths(1).atDay(1).atStartOfDay();
+        return ticketRepository.countTicketsSoldForCurrentMonth(startOfMonth,endOfMonth);
+
+    }
+
+    public List<Object[]> getWeeklyTicketSales(LocalDateTime startDate,LocalDateTime endDate){
+        return ticketRepository.findWeeklyTicketSales(startDate,endDate);
+    }
+
+    public List<Object[]> getTicketCountByEvent() {
+        return ticketRepository.findTicketCountByEvent();
+    }
 
 }
 

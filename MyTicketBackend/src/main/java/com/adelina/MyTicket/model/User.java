@@ -1,6 +1,7 @@
 package com.adelina.MyTicket.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,6 +12,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -30,11 +32,19 @@ public class User implements UserDetails {
     private String lastname;
     private String email;
     private String password;
-    @OneToMany(fetch=FetchType.LAZY)
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user",fetch=FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Ticket> tickets;
 
     @Enumerated(EnumType.STRING)
     private Role role;
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
 
     public User(Long id, String firstname, String lastname, String email, String password) {
 

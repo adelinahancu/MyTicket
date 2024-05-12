@@ -12,6 +12,8 @@ import java.util.List;
 
 @Repository
 public interface EventRepo extends JpaRepository<Event,Integer> {
+    @Query("SELECT e.eventName, SUM(t.ticketPrice) FROM Ticket t JOIN t.event e GROUP BY e.eventName")
+    List<Object[]> findRevenueByEvent();
 
 
 }

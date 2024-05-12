@@ -22,4 +22,12 @@ public class EventService {
     public Event getEvent(int eventId){
         return eventRepo.findById(eventId).orElseThrow(()->new RuntimeException("Event not found with id:"+eventId));
     }
+
+    public List<Object[]> getRevenueByEvent() {
+        return eventRepo.findRevenueByEvent();
+    }
+
+    public Event addEvent(Event event){
+       return  eventRepo.save(event);
+    }
 }

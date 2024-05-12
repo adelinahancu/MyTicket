@@ -7,6 +7,8 @@ import com.adelina.MyTicket.service.EventService;
 import com.adelina.MyTicket.service.LocationService;
 import com.adelina.MyTicket.service.SeatService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,10 +44,17 @@ public class EventController {
 
        return ResponseEntity.ok(seats);
 
-
-
    }
 
+   @GetMapping("/get-events-revenue")
+    public ResponseEntity<List<Object[]>> getEventRevenue(){
+       return new ResponseEntity<>(eventService.getRevenueByEvent(), HttpStatus.OK);
+   }
+
+   @PostMapping("/addEvent")
+    public ResponseEntity<?> addEvent(@RequestBody Event event){
+       return ResponseEntity.ok(eventService.addEvent(event));
+   }
 
 
 }

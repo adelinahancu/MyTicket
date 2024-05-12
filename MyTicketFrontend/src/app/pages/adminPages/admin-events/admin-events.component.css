@@ -1,0 +1,142 @@
+
+form{
+
+    margin-bottom: 30px;
+    margin-left:50px;
+  
+  }
+    
+    .form-group{
+      margin-bottom: 25px;
+      height:40px;
+      
+      
+      
+  
+      
+    }
+  
+    .form-group input{
+      height:100%;
+    width: 100%;
+    border:none;
+    outline:none;
+    padding: 0 10px;
+    color:#333;
+    transition: all 0.2s ease ;
+    border:1.2px solid  #DCDCDC;
+    background:#FAF9F6;
+    border-radius: 2px;
+    }
+  
+    h2{
+      font-family: 'Roboto',Arial, Helvetica, sans-serif;
+      margin-top:80px;
+      margin-bottom: 50px;
+    }
+
+    button{
+      background-color: #FFBF00;
+      margin: top 0px, !important;
+      font-weight: 500;
+    }
+  
+    .example-card {
+      
+    
+      border-radius: 13px!important;
+      width: 290px;
+      height: 254px;
+      margin: 10px;
+      box-sizing: border-box;
+      display:flex;
+      flex-direction: column;
+      border: 1px solid rgba(0, 0, 0, 0.125); /* Add a border for card */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-top: 200px;
+      position: relative;
+  
+    }
+    .locations-container{
+      margin-top: 70px;
+      align-items: center;
+      display:flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 50vh;
+    }
+    
+  h2{
+      text-align:center;
+      border-top: 200px;
+  }
+  
+  h3{
+    font-size: 14px;
+    font-family: "Roboto ", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  p{
+    color:#939090;
+  }
+  .card-image-container {
+    overflow: hidden;
+    height: 250px; /* Adjust the desired height for the image area */
+    
+    
+    border-top-left-radius: 13px;
+    border-top-right-radius: 13px;
+  }
+  .rounded-image {
+    border-radius: 13px 13px 0 0; /* Rounded top corners for image container */
+    overflow: hidden;
+  }
+  
+  .event-cards-container {
+      display: flex; /* Use Flexbox layout */
+      
+      align-self:center;
+      /* sjustify-content: center; */
+  
+     
+     
+    }
+    .rounded-image img {
+      width: 100%;
+      height: 100%; /* Ensure image fills the container */
+      object-fit: cover;
+    }
+    .card-image-container img {
+      width: 288px;
+      height:205px;
+    
+      
+      
+    }
+    
+    .mat-card-content {
+      left: 0px;
+      margin-top: 20px;
+      
+      
+      
+      
+    }
+    
+    .mat-card-actions {
+      display: flex;
+      justify-content: center;
+      padding: 8px; /* Add padding to the card actions area */
+    }
+  
+    .snackbar-success {
+      background-color: green;
+      color: white;
+    }
+    
+    .snackbar-error {
+      background-color: red;
+      color: white;
+    }
+  

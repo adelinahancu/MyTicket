@@ -18,6 +18,7 @@ public class Ticket {
     private int ticketId;
 
     @ManyToOne
+    @JoinColumn(name="user_id")
     private User user;
     @ManyToOne
     private Event event;

@@ -15,11 +15,12 @@
   }
   .locations-container{
     margin-top: 70px;
-    align-items: center;
+    /* align-items: center; */
     display:flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     height: 50vh;
+    padding:15px;
   }
   
 h2{
@@ -52,7 +53,7 @@ p{
 .location-cards-container {
     display: flex; /* Use Flexbox layout */
     flex-wrap: wrap;
-    justify-content: center;
+    /* justify-content: center; */
 
    
    

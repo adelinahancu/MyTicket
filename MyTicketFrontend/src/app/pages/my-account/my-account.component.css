@@ -29,7 +29,9 @@
     font-weight: 550;
     font-style: normal;
     font-size: 25px;
-    margin-top: 50px;
+    margin-top: 40px;
+    margin-bottom: 20px;;
+    margin-left:330px;
    
   }
 
@@ -50,8 +52,70 @@
   .custom-button:hover {
     background-color: #FFA500; /* Darker shade on hover */
 }
+mat-card{
+  width:315px;
+  height:400px;
+  margin:10px;
+}
 
 
+
+mat-card-subtitle{
+  font-size: 18px;
+  color:black;
+  margin-left: 0px;
+}
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content; */
+  margin-left: 100px;
+}
+
+.showTicketBtn{
+  width:100px;
+  height:30px;
+  border: none;
+  background-color: #FFBF00;
+  border-radius: 7px;
+  font-size: 15px;
+}
+
+.events-cards-container{
+  margin-top: 200px;
+  /* align-items: center; */
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 70vh;
+  margin-left: 0px;
+}
+.example-card{
+  /* flex-basis: calc(50%-10px); */
+  margin-bottom: 20px;
+  margin-right: 20px;
+  
+}
+.event-card{
+  border-radius: 13px!important;
+  width: 290px;
+  height: 254px;
+  margin: 10px;
+  box-sizing: border-box;
+  display:flex;
+  flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, 0.125); /* Add a border for card */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-top: 200px;
+  cursor:pointer;
+  position: relative;
+
+}
+
+.rounded-image {
+  border-radius: 13px 13px 0 0; /* Rounded top corners for image container */
+  overflow: hidden;
+}
 
   .label {
     color: #808080; 
@@ -139,3 +203,26 @@ a{
   box-shadow: 0 0 0 0.2rem rgba(255, 213, 0, 0.25); /* Optional: Add focus effect */
 }
 
+.events-container{
+  margin-top: 200px;
+  align-items: center;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 70vh;
+}
+.heart-icon {
+  position: absolute;
+  top: 10px; /* Adjust as needed */
+  right: 10px; /* Adjust as needed */
+  z-index: 1; /* Ensure the heart icon appears above other content */
+  background-color: rgba(255, 255, 255, 0.7); /* Optional: Add background color for better visibility */
+  padding: 5px; /* Optional: Add padding for better appearance */
+  border-radius: 50px;
+  font-weight:900;
+  font-size: 20px;
+}
+.heart-icon i.filled {
+color:#FFBF00; 
+background-color: yellow;
+}

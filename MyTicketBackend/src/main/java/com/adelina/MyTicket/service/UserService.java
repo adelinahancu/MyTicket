@@ -1,10 +1,13 @@
 package com.adelina.MyTicket.service;
 
 import com.adelina.MyTicket.dto.UserDto;
+import com.adelina.MyTicket.dto.UserMonthlyStats;
 import com.adelina.MyTicket.model.User;
 import com.adelina.MyTicket.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -26,5 +29,10 @@ public class UserService {
         user.setFirstname(userDto.getFirstname());
         user.setLastname(userDto.getLastname());
         userRepo.save(user);
+    }
+
+    public List<UserMonthlyStats> getMonthlyUserRegistrations(){
+        List<UserMonthlyStats> monthlyStats=userRepo.findMonthlyNewUserStats();
+        return monthlyStats;
     }
 }

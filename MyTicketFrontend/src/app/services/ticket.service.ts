@@ -1,10 +1,11 @@
 import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError } from 'rxjs';
+import { Observable, catchError, map } from 'rxjs';
 import { Seat } from '../model/seat.model';
 import { Eveniment } from '../model/eveniment.model';
 import { Ticket } from '../model/ticket.model';
 import { TicketRequest } from '../model/ticketRequest.model';
+import { MultipleTicketsRequest } from '../model/multipleTicketsRequest.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,21 +16,17 @@ export class TicketService {
 
   constructor(private http:HttpClient) { }
 
-  reserveTicket(ticketRequest: TicketRequest): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'http://localhost:4200' // Specify frontend origin
-      })
-    };
-
-    return this.http.post<any>(`${this.baseUrl}/reserve`, ticketRequest, httpOptions)
-      .pipe(
-        catchError(error => {
-          console.error('Error occurred while reserving ticket:', error);
-          throw error;
-        })
-      );
+  
+  reserveTickets(multipleTickets:MultipleTicketsRequest):Observable<Ticket[]>{
+    const token=localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+    return this.http.post<Ticket[]>(`${this.baseUrl}/reserve`,multipleTickets,{headers})
+    .pipe(
+      catchError(error=>{
+      console.error('Eroor occured while reserving ticket:',error);
+      throw error;
+    })
+    );
   }
 
 
@@ -49,6 +46,26 @@ export class TicketService {
         })
       );
   }
+
+  getUsersTicketsSortedByEmail(email: string): Observable<Ticket[]> {
+    return this.http.get<Ticket[]>(`${this.baseUrl}/userTickets/${email}`).pipe(
+      map((tickets: Ticket[]) => {
+        // Sort the tickets by event date in ascending order
+        return tickets.sort((a, b) => {
+          const dateA = new Date(a.event.eventDate).getTime();
+          const dateB = new Date(b.event.eventDate).getTime();
+          return dateA - dateB;
+        });
+      })
+    );
+  }
   
+  downloadTicketPdf(ticketId: number): Observable<Blob> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post(`${this.baseUrl}/${ticketId}/pdf`, {}, {
+      headers: headers,
+      responseType: 'blob'
+    });
+  }
 
 }

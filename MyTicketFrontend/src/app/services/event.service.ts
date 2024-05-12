@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Eveniment } from '../model/eveniment.model';
@@ -24,5 +24,11 @@ export class EventService {
   
   getEventSeats(eventId:number):Observable<Seat[]>{
     return this.http.get<Seat[]>(`${this.baseUrl}/getEventSeat/${eventId}`);
+  }
+
+  addEvent(event:Eveniment):Observable<Eveniment>{
+    const token=localStorage.getItem('access_token');
+    const headers=new HttpHeaders({'Authorization':`Bearer ${token}`,'Content-Type': 'application/json'});
+    return this.http.post<Eveniment>(`${this.baseUrl}/addEvent`, event, { headers });
   }
 }

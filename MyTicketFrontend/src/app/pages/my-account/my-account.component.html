@@ -11,18 +11,15 @@
             </div>
             <div class="divider"></div>
             <ul class="sidebar-menu">
-                <li (click)="showTickets()"><i class="bi bi-ticket-detailed-fill "
+                <li (click)="getUsersTickets(userDto.email)"><i class="bi bi-ticket-detailed-fill "
                         style="margin-right: 10px; font-weight: bold;"></i><a href=javascript:void(0)
-                        (click)="showTickets()">Bilete</a></li>
+                        (click)="getUsersTickets(userDto.email)">Bilete</a></li>
                 <div class="divider"></div>
                 <li (click)="showFavorites()"><i class="bi bi-heart-fill"
                         style="margin-right: 10px;font-weight: bold;"></i><a href=javascript:void(0)
                         (click)="showFavorites()">Favorite</a></li>
                 <div class="divider"></div>
-                <li (click)="showTransactionHistory()"><i class="bi bi-clock-fill "
-                        style="margin-right: 10px;font-weight: bold;"></i><a href=javascript:void(0)
-                        (click)="showTransactionHistory()">Istoric tranzactii</a></li>
-                <div class="divider"></div>
+                
                 <li (click)="showProfile()"><i class="bi bi-person-fill"
                         style="margin-right: 10px;font-weight: bold;"></i><a href=javascript:void(0)
                         (click)="showProfile()">Profil</a></li>
@@ -37,18 +34,77 @@
         <div>
             <div *ngIf="selectedItem ==='Bilete'">
                 <h2>Bilete cumpărate</h2>
-                <!-- <ul>
-        <li *ngFor="let ticket of tickets">{{ticket.ticketPrice}}</li>
-    </ul> -->
+                
+        <div class="card-container">
+                    <mat-card class="example-card" *ngFor="let ticket of tickets">
+                        
+                        <img mat-card-image src={{ticket.event.imageUrl}} style="width: 315px; height: 200px; object-fit: cover;">
+                        <mat-card-content>
+                            <mat-card-subtitle style="margin-bottom: 5px;">{{ticket.event.eventName}}</mat-card-subtitle>
+                            <div class="container" style="display:inline-block;margin-bottom: none;">
+                                <i class="bi bi-calendar2-week"></i><p style="display: inline-block;margin-bottom: 5px;margin-left: 5px;">{{ticket.event.eventDate| date:'dd-MM-yyyy'}}</p>
+                        </div>
+                        <div class="container" style="display:inline-block;margin-bottom: none;">
+                            <i class="bi bi-clock"></i><p style="display: inline-block;margin-bottom: 5px;margin-left: 5px;">{{ticket.event.startTime}}-{{ticket.event.endTime}}</p>
+                    </div>
+                        <div class="container" style="display:inline-block;">
+                            <i class="bi bi-geo-alt"></i><p style="display: inline-block;margin-bottom: 5px;margin-left: 5px;">{{ticket.event.location.locationName}}</p>
+                    </div>
+                    <div class="container" style="display:inline-block;">
+                        <i class="bi bi-wallet2"></i><p style="display: inline-block;margin-left: 5px;margin-bottom: 5px">{{ticket.ticketPrice}} RON</p>
+                </div>
+                <div class="container" style="display:inline-block;">
+                    <i class="bi bi-geo"></i><p style="display: inline-block;margin-left: 5px;margin-bottom: 5px">Loc {{ticket.seat.seatNumber}} </p>
             </div>
+                        </mat-card-content >
+                        <div class="container" style="display: flex;align-items: center;justify-content: center;">
+                        <button class="showTicketBtn" (click)="openTicketPdf(ticket.ticketId)"><i class="bi bi-ticket-detailed" style="margin-right: 6px;"></i>Vezi bilet</button>
+                    </div>
+                      </mat-card>
+                      
+            </div>
+        </div>
             <div *ngIf="selectedItem === 'Favorite'">
                 <h2>Favorite</h2>
-                <!-- Display favorite items here -->
+                <div class="card-container">
+                    <mat-card *ngFor="let event of favoriteEvents;" class="event-card" [routerLink]="['/events',event.id]" style="width:288px; height:250px;width: 30%; /* Adjust the width as needed */
+                    margin-bottom: 20px;">
+                      
+                      <div class="heart-icon" (click)="toggleFavorite(event,$event)">
+          <i class="bi" [ngClass]="{'bi-heart': !isFavorite(event), 'bi-heart-fill ': isFavorite(event)}"></i>
+          
+      </div>
+                      <div class="card-image-container">
+                        <div class="rounded-image">
+                          <img [src]="event.imageUrl || 'https://via.placeholder.com/300x400'" alt="Location Image" style="width:247px;height:205px;object-fit: cover;">
+                        </div>
+                      </div>
+                      <mat-card-content>
+                       
+                        <p><i class="bi bi-geo-alt-fill" style="color:black"></i> {{event.location.locationName}}</p>
+                      </mat-card-content>
+                      <!-- Optional: Add actions like buttons (e.g., for editing or viewing details) -->
+                    
+                    </mat-card>
+                  </div>
+                    <!-- Optional: Add actions like buttons (e.g., for editing or viewing details) -->
+                  </div>
+                  
+                   
+                 
             </div>
 
             <div *ngIf="selectedItem === 'Istoric tranzactii'">
                 <h2>Istoric tranzactii</h2>
-                <!-- Display transaction history here -->
+                <div class="transaction-container">
+                    <div *ngFor="let transaction of transactions" class="transaction-card">
+                      <p><strong>ID Tranzacție:</strong> {{transaction.id}}</p>
+                      <p><strong>Data:</strong> {{transaction.created * 1000 | date:'dd-MM-yyyy HH:mm'}}</p>
+                      <p><strong>Sumă:</strong> {{transaction.amount / 100 | currency:'RON':'symbol':'1.2-2'}}</p>
+                      <p><strong>Descriere:</strong> {{transaction.description}}</p>
+                      <p><strong>Stare:</strong> {{transaction.status}}</p>
+                    </div>
+                  </div>
             </div>
 
             <div *ngIf="selectedItem === 'Profil'">
@@ -86,4 +142,3 @@
     </div>
     </div>
     
-</div>

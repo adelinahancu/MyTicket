@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+        <app-dashboard></app-dashboard>
+      </div>
+  
+      <div class="col-lg-10">
+        <h2 class="text-center">Adaugă un eveniment</h2>
+  
+        <form [formGroup]="addEventForm" (ngSubmit)="addEvent()">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="text" class="form-control" id="eventName" placeholder="Denumire eveniment" formControlName="eventName" [(ngModel)]="event.eventName">
+              </div>
+  
+              <div class="form-group">
+                <input type="text" class="form-control" id="description" placeholder="Descriere" formControlName="description"[(ngModel)]="event.description">
+              </div>
+              <div class="form-group">
+                <input type="date" placeholder="Data eveniment" class="form-control" id="data" formControlName="eventDate" [(ngModel)]="event.eventDate">
+              </div>
+              <div class="form-group">
+                <input type="text" placeholder="Ora inceput" class="form-control" id="startTime" formControlName="startTime" [(ngModel)]="event.startTime">
+              </div>
+              <div class="form-group">
+                <select class="form-control" formControlName="locationId" (change)="onLocationChange($event)">
+                  <option value="" disabled selected>Selectează locația</option>
+                  <option *ngFor="let location of locations" [value]="location.id">{{ location.locationName }}</option>
+                </select>
+              </div>
+            
+            </div>
+  
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="text" class="form-control" id="categorie" placeholder="Categorie" formControlName="category" [(ngModel)]="event.category">
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" id="imageUrl" placeholder="URL" formControlName="imageUrl" [(ngModel)]="event.imageUrl">
+              </div>
+              <div class="form-group">
+                <input type="number" placeholder="Pret bilet" class="form-control" id="price" formControlName="ticketPrice" [(ngModel)]="event.ticketPrice">
+              </div>
+              <div class="form-group">
+                <input type="text" placeholder="Ora sfarsit" class="form-control" id="endTime" formControlName="endTime"[(ngModel)]="event.endTime">
+              </div>
+            </div>
+          </div>
+  
+          <div class="text-right mt-3">
+            <button type="submit" class="btn btn-primary">Adaugă eveniment</button>
+          </div>
+        </form>
+  
+        <div class="event-cards-container">
+          <div class="row">
+            <div class="col-md-4" *ngFor="let event of events">
+              <mat-card class="example-card">
+                <div class="card-image-container">
+                  <div class="rounded-image">
+                    <img [src]="event.imageUrl || 'https://via.placeholder.com/300x400'" alt="Event Image">
+                  </div>
+                </div>
+                <mat-card-content>
+                  <h3 style="margin-bottom: 0px; margin-top: 8px;">{{ event.eventName }}</h3>
+                  <p><i class="bi bi-geo-alt-fill" style="color:black"></i> {{ event.location.locationName }}</p>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

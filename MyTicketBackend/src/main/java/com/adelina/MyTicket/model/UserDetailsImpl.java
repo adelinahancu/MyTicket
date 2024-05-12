@@ -12,7 +12,7 @@ import java.util.Objects;
 
 @Data
 public class UserDetailsImpl implements UserDetails {
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
     private Long id;
     private String firstname;
     private String lastname;
@@ -34,10 +34,10 @@ public class UserDetailsImpl implements UserDetails {
 
     }
 
-    public static UserDetailsImpl build(User user){
-    SimpleGrantedAuthority authority=new SimpleGrantedAuthority(user.getRole().name());
-    return new UserDetailsImpl(user.getId(),user.getFirstname(), user.getLastname(), user.getEmail(), user.getPassword(), Collections.singletonList(authority));
-}
+    public static UserDetailsImpl build(User user) {
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().name());
+        return new UserDetailsImpl(user.getId(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getPassword(), Collections.singletonList(authority));
+    }
 
 
     @Override

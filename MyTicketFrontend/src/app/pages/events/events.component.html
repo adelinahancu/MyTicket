@@ -1,18 +1,22 @@
 <div class="events-container">
-    <h2>Evenimente</h2>
-    <div class="events-cards-container">
-      <mat-card *ngFor="let event of events" class="example-card" [routerLink]="['/events',event.id]">
-        <div class="card-image-container">
-          <div class="rounded-image">
-            <img [src]="event.imageUrl || 'https://via.placeholder.com/300x400'" alt="Location Image">
-          </div>
+  <h2>Evenimente</h2>
+  <div class="events-cards-container">
+    <mat-card *ngFor="let event of events;" class="example-card" [routerLink]="['/events',event.id]">
+      <div class="card-image-container">
+        <div class="heart-icon" (click)="toggleFavorite(event, $event)">
+          <i class="bi" [ngClass]="{'bi-heart': !isFavorite(event), 'bi-heart-fill': isFavorite(event)}"></i>
         </div>
-        <mat-card-content>
-         
-          <p><i class="bi bi-geo-alt-fill" style="color:black"></i> {{event.location.locationName}}</p>
-        </mat-card-content>
-        <!-- Optional: Add actions like buttons (e.g., for editing or viewing details) -->
-       
-      </mat-card>
-    </div>
+        <div class="rounded-image">
+          <img [src]="event.imageUrl || 'https://via.placeholder.com/300x400'" alt="Event Image" style="width:290px;height: 205px;">
+        </div>
+      </div>
+      <mat-card-content>
+        <h3>{{event.eventName}}</h3>
+        <p *ngIf="event.location?.locationName">
+          <i class="bi bi-geo-alt-fill" style="color:black"></i> {{event.location.locationName}}
+        </p>
+      </mat-card-content>
+      <!-- Optional: Add actions like buttons (e.g., for editing or viewing details) -->
+    </mat-card>
   </div>
+</div>
