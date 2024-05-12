@@ -11,10 +11,11 @@
     border: 1px solid rgba(0, 0, 0, 0.125); /* Add a border for card */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-top: 200px;
+    cursor:pointer;
 
   }
   .events-container{
-    margin-top: 70px;
+    margin-top: 150px;
     align-items: center;
     display:flex;
     flex-direction: column;

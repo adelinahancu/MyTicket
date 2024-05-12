@@ -1,0 +1,137 @@
+<div class="wrapper">
+<div class="row">
+        
+    <div class="col-md-12 clearfix">
+        <div class="ticket_order_step">
+            <div  class="col-lg-4 first_step ">
+                <a>
+                    <span>1.</span>
+                    <span>Data și locul</span>
+                </a>
+            </div>
+            <div click="stepTwo" class="col-lg-4 second_step active">
+                <a>
+                    <span>2.</span>
+                    <span>Plata</span>
+                </a>
+            </div>
+            <div class="col-lg-4 third_step">
+                <a>
+                    <span>3.</span>
+                    <span>Finalizat</span>
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</div>
+
+<div class="container">
+   
+   
+    <form #f="ngForm" novalidate (ngSubmit)="f.valid && onSubmit()">
+        <div class="row">
+            <div class="col">
+                <h3 class="title">Detalii client:</h3>
+                <div class="input-group">
+                    <span>Nume:</span>
+                    <input [(ngModel)]=user.lastname  type="text" placeholder="Numele complet" name="fullname" required>
+                </div>
+                <div class="input-group">
+                    <span>Prenume:</span>
+                    <input [(ngModel)]=user.firstname  type="text" placeholder="Numele complet" name="firstname" required>
+                </div>
+                <div class="input-group">
+                    <span>Email:</span>
+                    <input  [(ngModel)]=chargeRequest.email type="email" placeholder="example@email.com" name="email" required>
+                </div>
+                
+            </div>
+            <div class="col">
+                <h3 class="title">Detalii plata:</h3>
+                <div class="input-group">
+                    <span>Carduri acceptate:</span>
+                    <img src="../../../assets/images/card.png" style="margin-left: 10px;">
+                </div>
+
+                <div class="input-group">
+                    <span>Detinatorul cardului:</span>
+                    <input [(ngModel)]="chargeRequest.cardHolderName" type="text" required placeholder="Nume Prenume" name="nameOnCard">
+                </div>
+                <div class="text-danger" *ngIf="f.controls['nameOnCard']?.errors && f.submitted">
+                    <div *ngIf="f.controls['nameOnCard']?.errors?.['required']"><small>Numele de pe card este obligatoriu!</small></div>
+                </div>
+
+                <div class="input-group">
+                    <span>Numarul cardului:</span>
+                    <input [(ngModel)]="chargeRequest.number" type="text" placeholder="1234 1234 1234 1234" name="cardNumber" required maxlength="16">
+                </div>
+                <div class="text-danger" *ngIf="f.controls['cardNumber']?.errors && f.submitted">
+                    <div *ngIf="f.controls['cardNumber']?.errors?.['minlength']"><small>Numarul cardului trebuie sa contina 16 cifre!</small></div>
+                </div>
+                <div class="text-danger" *ngIf="f.controls['cardNumber']?.errors && f.submitted">
+                    <div *ngIf="f.controls['cardNumber']?.errors?.['required']"><small>Numarul cardului este obligatoriu!</small></div>
+                </div>
+                <div class="input-group">
+                    <span>Luna expirarii:</span>
+                    <select [(ngModel)]="chargeRequest.expMonth" type="number" name="expMonth" placeholder="09" required="">
+                        <option disabled selected value="">LL</option>
+                        <option value=01>01</option>
+                        <option value=02>02</option>
+                        <option value=03>03</option>
+                        <option value=04>04</option>
+                        <option value=05>05</option>
+                        <option value=06>06</option>
+                        <option value=07>07</option>
+                        <option value=08>08</option>
+                        <option value=09>09</option>
+                        <option value=10>10</option>
+                        <option value=11>11</option>
+                        <option value=12>12</option>
+                    
+                    </select>
+                </div>
+                <div class="text-danger" *ngIf="f.controls['expMonth']?.errors && f.submitted">
+                    <div *ngIf="f.controls['expMonth']?.errors?.['required']"><small>Expiry month is required</small></div>
+                </div>
+                <div class="input-group">
+                    <div>
+                        <span>Anul expirarii:</span>
+                        <select [(ngModel)]="chargeRequest.expYear"type="number" name="expYear" placeholder="AAAA" required="">
+                            <option disabled selected value="">Year</option>
+                                    <option selected value=2024>2024</option>
+                                    <option value=2025>2025</option>
+                                    <option value=2026>2026</option>
+                                    <option value=2027>2027</option>
+                                    <option value=2028>2028</option>
+                                    <option value=2029>2029</option>
+                                    <option value=2030>2030</option>
+                                    <option value=2031>2031</option>
+                        </select>
+                    </div>
+                    
+                </div>
+                <div class="text-danger" *ngIf="f.controls['expYear']?.errors && f.submitted">
+                    <div *ngIf="f.controls['expYear']?.errors?.['required']"><small>Expiry year is required</small></div>
+                </div>
+                
+
+                <div class="input-group">
+                    <span>CVC:</span>
+                    <input  [(ngModel)]="chargeRequest.cvc" type="text" placeholder="123" name="cvc" required maxlength="3" minlength="3">
+                    <div class="text-danger" *ngIf="f.controls['cvc']?.errors && f.submitted">
+                        <div *ngIf="f.controls['cvc']?.errors?.['required']"><small>CVC este obligatoriu!</small></div>
+                    </div>
+                    <div class="text-danger" *ngIf="f.controls['cvc']?.errors && f.submitted">
+                        <div *ngIf="f.controls['cvc']?.errors?.['minlength']"><small>CVV must contain 3 digits</small></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="submit-btn" type="submit">Plateste {{chargeRequest.amount}} RON</button>
+    </form>
+
+</div>

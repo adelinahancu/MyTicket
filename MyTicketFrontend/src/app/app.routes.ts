@@ -9,6 +9,8 @@ import { LocationsComponent } from './pages/locations/locations.component';
 import { EventsComponent } from './pages/events/events.component';
 import { EventDetailsComponent } from './pages/event-details/event-details.component';
 import { LocationLayoutComponent } from './pages/location-layout/location-layout.component';
+import { PaymentComponent } from './pages/payment/payment.component';
+import { SuccessPaymentComponent } from './pages/success-payment/success-payment.component';
 
 export const routes: Routes = [
     { path:'login', component: LoginComponent },
@@ -19,5 +21,7 @@ export const routes: Routes = [
     {path:'locations',component:LocationsComponent},
     {path:"events",component:EventsComponent},
     {path:'events/:id',component:EventDetailsComponent},
-    {path:'event/:eventId/location/:locationId',component:LocationLayoutComponent}
+    {path:'event/:eventId/location/:locationId',component:LocationLayoutComponent},
+    {path:'payment',component:PaymentComponent},
+    {path:'successPayment',component:SuccessPaymentComponent}
 ];

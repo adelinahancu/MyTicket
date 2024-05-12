@@ -23,7 +23,7 @@ public class Event {
     @ManyToOne
     private Location location;
     private String category;
-    private LocalDateTime eventDate;
+    private Date eventDate;
     private String startTime;
     private String endTime;
     private int ticketPrice;

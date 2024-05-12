@@ -9,6 +9,8 @@ import com.adelina.MyTicket.model.Ticket;
 import com.adelina.MyTicket.payload.MultipleTicketsRequest;
 import com.adelina.MyTicket.payload.TicketRequest;
 import com.adelina.MyTicket.service.TicketService;
+import com.itextpdf.text.DocumentException;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +28,8 @@ public class TicketController {
     private final TicketService ticketService;
 
     @PostMapping("/reserve")
-    public ResponseEntity<?> reserveTicket(@RequestBody MultipleTicketsRequest ticketRequest) {
-        List<Ticket> reservedTickets = ticketService.reserveTickets(ticketRequest);
+    public ResponseEntity<?> reserveTicket(@RequestBody MultipleTicketsRequest ticketRequest) throws MessagingException, DocumentException {
+        List<Ticket> reservedTickets = ticketService.reserve(ticketRequest);
         if (reservedTickets.isEmpty())
             return ResponseEntity.badRequest().body(new MessageResponse("Empty"));
         return ResponseEntity.ok(reservedTickets);

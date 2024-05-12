@@ -1,0 +1,44 @@
+<div class="container" *ngIf="loading" style="margin:150px auto; margin-top:150px; text-align: center;">
+
+    <h1 style="color: green; font-size: 50px;">Payment in process..</h1>
+    <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+</div>
+ <div class="wrapper" *ngIf="!loading"> 
+    <div class="row">
+            
+        <div class="col-md-12 clearfix">
+            <div class="ticket_order_step">
+                <div  class="col-lg-4 first_step ">
+                    <a>
+                        <span>1.</span>
+                        <span>Data și locul</span>
+                    </a>
+                </div>
+                <div click="stepTwo" class="col-lg-4 second_step ">
+                    <a>
+                        <span>2.</span>
+                        <span>Plata</span>
+                    </a>
+                </div>
+                <div class="col-lg-4 third_step active">
+                    <a>
+                        <span>3.</span>
+                        <span>Finalizat</span>
+                    </a>
+                </div>
+    
+            </div>
+    
+        </div>
+    </div>
+    </div>
+<div class="wrapper">
+    <div class="success">
+      
+        <h1 style="color:black;font-weight: 500;">Plata a fost efectuată cu success!</h1>
+        <i class="bi bi-check-circle icon"></i>
+        
+        <p style="margin-top: 40px;font-size: 18px;">Suma plătită: {{this.amount}} RON</p>
+    </div>
+
+</div>

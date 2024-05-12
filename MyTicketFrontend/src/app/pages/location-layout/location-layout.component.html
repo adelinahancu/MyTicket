@@ -44,7 +44,7 @@
    
     <div class="seats-container">
         <div class="scene"><h3>Scena</h3></div>
-        <svg width="800" height="300" class="seat-svg">
+        <svg width="800" height="400" class="seat-svg">
             <!--<image [attr.href]="'assets/images/scena1.png'" width="800" height="500" />-->
 
 
@@ -52,7 +52,7 @@
             <ng-container *ngFor="let seat of seats">
                 <rect [attr.x]="seat.x" [attr.y]="seat.y" [attr.rx]="5" [attr.ry]="5" width="30" height="30"
                     (click)="onSeatSelected(seat)"
-                    [ngClass]="{ 'booked': !seatAvailability[seat.id], 'available': seatAvailability[seat.id],'unavailable-seat': seatAvailability[seat.id],'available-seat': !seatAvailability[seat.id]  }"></rect>
+                    [ngClass]="{ 'booked': !seatAvailability[seat.id], 'available': seatAvailability[seat.id],'unavailable-seat': seatAvailability[seat.id],'available-seat': !seatAvailability[seat.id] ,'selected': isSeatSelected(seat) }"></rect>
             </ng-container>
         </svg>
 
@@ -62,13 +62,19 @@
         <div class="seat-info">
         <div>Rând: {{ seat.rowNumber }}</div>
         <div>Număr loc: {{ seat.seatNumber }}</div>
+        <div>Pret:{{event.ticketPrice}} lei</div>
     </div>
     <div class="event-date" style="font-size: 15px;">{{ event?.eventDate | date: "MMMM d" }}</div>
-    <i class="bi bi-x close-icon"></i>
+    <i class="bi bi-x close-icon" (click)="removeSeat(seat)"></i>
   </div>
+  <div class="total-amount">
+    <div class="left">Total de plată:</div>
+    <div class="right">{{totalAmountToPay}} lei</div>
+    </div>
 
     <div class="button-container">
-        <button  class="reserve-button">Rezerveaza</button>
+        <button  class="reserve-button" (click)="navigateToPayment(totalAmountToPay,event,selectedSeat)">Continuă<i class="bi bi-arrow-right-circle-fill" style="margin-left: 20px; font-weight:900; /* Setează grosimea textului la bold */
+  font-size: 1.3rem;"></i></button>
     </div>
       
 

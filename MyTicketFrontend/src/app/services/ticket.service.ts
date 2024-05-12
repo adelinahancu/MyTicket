@@ -5,6 +5,7 @@ import { Seat } from '../model/seat.model';
 import { Eveniment } from '../model/eveniment.model';
 import { Ticket } from '../model/ticket.model';
 import { TicketRequest } from '../model/ticketRequest.model';
+import { MultipleTicketsRequest } from '../model/multipleTicketsRequest.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,21 +16,17 @@ export class TicketService {
 
   constructor(private http:HttpClient) { }
 
-  reserveTicket(ticketRequest: TicketRequest): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'http://localhost:4200' // Specify frontend origin
-      })
-    };
-
-    return this.http.post<any>(`${this.baseUrl}/reserve`, ticketRequest, httpOptions)
-      .pipe(
-        catchError(error => {
-          console.error('Error occurred while reserving ticket:', error);
-          throw error;
-        })
-      );
+  
+  reserveTickets(multipleTickets:MultipleTicketsRequest):Observable<Ticket[]>{
+    const token=localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+    return this.http.post<Ticket[]>(`${this.baseUrl}/reserve`,multipleTickets,{headers})
+    .pipe(
+      catchError(error=>{
+      console.error('Eroor occured while reserving ticket:',error);
+      throw error;
+    })
+    );
   }
 
 

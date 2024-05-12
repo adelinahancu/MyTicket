@@ -11,6 +11,7 @@ export class Eveniment{
     imageUrl:string;
     startTime:string;
     endTime:string;
+    ticketPrice:number;
     
 
 }
