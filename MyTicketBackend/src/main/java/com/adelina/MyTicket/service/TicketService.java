@@ -2,11 +2,17 @@ package com.adelina.MyTicket.service;
 
 import com.adelina.MyTicket.auth.AuthenticationRequest;
 import com.adelina.MyTicket.model.*;
+import com.adelina.MyTicket.payload.EmailAttachment;
 import com.adelina.MyTicket.payload.MultipleTicketsRequest;
 import com.adelina.MyTicket.payload.TicketRequest;
 import com.adelina.MyTicket.repo.TicketRepository;
 import com.adelina.MyTicket.repo.UserRepo;
+import com.itextpdf.text.DocumentException;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
+import net.glxn.qrgen.QRCode;
+import net.glxn.qrgen.image.ImageType;
+import org.apache.commons.io.FileUtils;
 import org.springframework.aop.scope.ScopedProxyUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -15,7 +21,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +42,8 @@ public class TicketService {
     private final TicketRepository ticketRepository;
     private final UserRepo userRepo;
 
+    private final EmailSenderService emailSenderService;
+    private final PdfGeneratorService pdfGeneratorService;
     public boolean isSeatAvailableForEvent(Event event, Seat seat) {
 
         Ticket ticket = ticketRepository.findByEventAndSeat(event, seat);
@@ -42,14 +57,14 @@ public class TicketService {
 
 
 
-    public List<Ticket> reserveTickets(MultipleTicketsRequest ticketsRequest) {
+    public List<Ticket> reserve(MultipleTicketsRequest ticketsRequest) throws MessagingException, DocumentException {
         Event event = ticketsRequest.getEvent();
         List<Seat> seats = ticketsRequest.getSeats();
-
+        List<String> ticketPdfPaths=new ArrayList<>();
 
         List<Ticket> reservedTickets = new ArrayList<>();
 
-        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         System.out.println("Type of UserDetails object: " + userDetails.getClass().getName());
         String username = userDetails.getUsername();
 
@@ -76,13 +91,24 @@ public class TicketService {
                     ticket.setTicketPrice(BigDecimal.valueOf(event.getTicketPrice()));
                     ticketRepository.save(ticket);
                     reservedTickets.add(ticket);
+                    String ticketPdfPath="src/main/resources/static/file_with_qrcode/ticket_"+ticket.getSeat().getSeatNumber()+".pdf";
+                    pdfGeneratorService.generateTicketPdf(ticket,ticketPdfPath);
+                    ticketPdfPaths.add(ticketPdfPath);
+                 //  emailSenderService.sendMailWithAttachment(username,"Bilet rezervat cu succes!","Bilete","src/main/resources/static/file_with_qrcode/ticket.pdf");
+
                 }
             }
         }
 
-
+        //emailSenderService.sendEmail(username,"Bilete","Bilete rezervate cu succes");
+       // emailSenderService.sendMailWithAttachment(username,"Bilete rezervate cu success!","Bilete","C:\\Users\\adeli\\Downloads\\NOTE DE CURS.pdf");
+        emailSenderService.sendMailWithAttachments(username,"Bună ziua! \n\n Ați cumpărat cu succes bilet-ul/tele.\nGăsiți atașate biletele în format pdf și qr codul corespunzător.","Bilete",ticketPdfPaths);
         return reservedTickets;
     }
+
+
+
+
 }
 
 
