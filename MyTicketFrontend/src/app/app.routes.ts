@@ -11,8 +11,11 @@ import { EventDetailsComponent } from './pages/event-details/event-details.compo
 import { LocationLayoutComponent } from './pages/location-layout/location-layout.component';
 import { PaymentComponent } from './pages/payment/payment.component';
 import { SuccessPaymentComponent } from './pages/success-payment/success-payment.component';
+<<<<<<< HEAD
 import { StatsComponent } from './pages/adminPages/stats/stats.component';
 import { AdminEventsComponent } from './pages/adminPages/admin-events/admin-events.component';
+=======
+>>>>>>> d0a9e15cb6077b9b112d0e76d27ccc7f85d7284a
 
 export const routes: Routes = [
     { path:'login', component: LoginComponent },
@@ -25,7 +28,11 @@ export const routes: Routes = [
     {path:'events/:id',component:EventDetailsComponent},
     {path:'event/:eventId/location/:locationId',component:LocationLayoutComponent},
     {path:'payment',component:PaymentComponent},
+<<<<<<< HEAD
     {path:'successPayment',component:SuccessPaymentComponent},
     {path:'stats',component:StatsComponent},
     {path:'addEvent',component:AdminEventsComponent}
+=======
+    {path:'successPayment',component:SuccessPaymentComponent}
+>>>>>>> d0a9e15cb6077b9b112d0e76d27ccc7f85d7284a
 ];

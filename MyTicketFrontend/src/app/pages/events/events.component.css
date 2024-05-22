@@ -1,4 +1,5 @@
 .example-card {
+<<<<<<< HEAD
   border-radius: 13px!important;
   width: 290px;
   height: 254px;
@@ -11,6 +12,35 @@
   cursor: pointer;
   position: relative;
   margin:10px;
+=======
+    
+    
+    border-radius: 13px!important;
+    width: 290px;
+    height: 254px;
+    margin: 10px;
+    box-sizing: border-box;
+    display:flex;
+    flex-direction: column;
+    border: 1px solid rgba(0, 0, 0, 0.125); /* Add a border for card */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-top: 200px;
+    cursor:pointer;
+
+  }
+  .events-container{
+    margin-top: 150px;
+    align-items: center;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 50vh;
+  }
+  
+h2{
+    text-align:center;
+    border-top: 200px;
+>>>>>>> d0a9e15cb6077b9b112d0e76d27ccc7f85d7284a
 }
 
 .events-container {
