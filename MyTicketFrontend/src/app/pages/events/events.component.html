@@ -10,11 +10,16 @@
           <img [src]="event.imageUrl || 'https://via.placeholder.com/300x400'" alt="Event Image" style="width:290px;height: 205px;">
         </div>
       </div>
-      <mat-card-content>
+      <mat-card-content >
+        
         <h3>{{event.eventName}}</h3>
         <p *ngIf="event.location?.locationName">
           <i class="bi bi-geo-alt-fill" style="color:black"></i> {{event.location.locationName}}
         </p>
+      
+  
+        <p><i class="fa-solid fa-calendar" style="color:black;margin-right: 7px;"></i>{{event.eventDate | date:'dd MMM'}}</p>
+      
       </mat-card-content>
       <!-- Optional: Add actions like buttons (e.g., for editing or viewing details) -->
     </mat-card>

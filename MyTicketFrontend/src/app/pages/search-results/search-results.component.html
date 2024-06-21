@@ -1,0 +1,19 @@
+<div class="page">
+    <h2 style="margin-left: 5px;">Rezultatele cautarii "{{searchQuery}}"</h2>
+    <mat-card *ngFor="let result of results;" class="example-card" >
+        <div class="card-image-container">
+         
+          <div class="rounded-image">
+            <img [src]="result.imageUrl || 'https://via.placeholder.com/300x400'" alt="Event Image" style="width:290px;height: 205px;">
+          </div>
+        </div>
+        <mat-card-content>
+          <h3>{{result.eventName}}</h3>
+          <p *ngIf="result.location?.locationName">
+            <i class="bi bi-geo-alt-fill" style="color:black"></i> {{result.location.locationName}}
+          </p>
+        </mat-card-content>
+        <!-- Optional: Add actions like buttons (e.g., for editing or viewing details) -->
+      </mat-card>
+
+</div>

@@ -12,6 +12,7 @@ export class Eveniment{
     startTime:string;
     endTime:string;
     ticketPrice:number;
+    ticketsSold:number;
     
 
 }

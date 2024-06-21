@@ -1,0 +1,43 @@
+/* Custom table styles */
+.custom-table {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .custom-table .mat-header-cell {
+    background-color: black;
+    color: white;
+    text-align: center; /* Center the header text horizontally */
+  }
+  
+  .custom-table .mat-cell {
+    text-align: center; /* Center the cell text horizontally */
+    vertical-align: middle; /* Center the cell text vertically */
+  }
+  
+
+  /* Ensure the table cells fit within the table's border-radius */
+  .custom-table .mat-header-row,
+  .custom-table .mat-row {
+    border-radius: 10px;
+  }
+  
+  .custom-table .mat-header-row:first-child,
+  .custom-table .mat-row:first-child {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  tr:nth-child(odd) {
+    background-color: #ffffff;
+  }
+  
+  .custom-table .mat-row:last-child {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  

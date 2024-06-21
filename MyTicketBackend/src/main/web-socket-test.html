@@ -1,10 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>WebSocket STOMP Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stompjs/lib/stomp.min.js"></script>
+    <script>
+        let stompClient = null;
+
+        function connect() {
+            let socket = new SockJS('/app/ws');
+            stompClient = Stomp.over(socket);
+            stompClient.connect({ 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiVVNFUiIsInN1YiI6ImFkZWxpbmEuaGFuY3U4QGdtYWlsLmNvbSIsImlhdCI6MTcxNzA2NTUwOCwiZXhwIjoxNzE3MTUxOTA4fQ.ELTsFkxB923yC7jtiwvpPvAlXfD4_RZPuZil4fKaV3w' }, function (frame) {
+                console.log('Connected: ' + frame);
+                stompClient.subscribe('/topic/messages', function (message) {
+                    showMessage(message.body);
+                });
+            });
+        }
+
+        function disconnect() {
+            if (stompClient !== null) {
+                stompClient.disconnect();
+            }
+            console.log("Disconnected");
+        }
+
+        function sendMessage() {
+            let message = document.getElementById('message').value;
+            stompClient.send("/app/hello", {}, message);
+        }
+
+        function showMessage(message) {
+            let response = document.getElementById('response');
+            let p = document.createElement('p');
+            p.appendChild(document.createTextNode(message));
+            response.appendChild(p);
+        }
+
+        window.onload = connect;
+    </script>
 </head>
 <body>
-$END$
+<h1>WebSocket STOMP Test</h1>
+<input type="text" id="message" placeholder="Enter message">
+<button onclick="sendMessage()">Send Message</button>
+<button onclick="disconnect()">Disconnect</button>
+<div id="response"></div>
 </body>
 </html>

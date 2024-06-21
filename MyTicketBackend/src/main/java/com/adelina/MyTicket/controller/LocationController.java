@@ -28,25 +28,7 @@ public class LocationController {
         return ResponseEntity.ok(locationService.getAllLocations());
     }
 
-    @PostMapping("/addLocation")
-    public ResponseEntity<?> addLocation(@RequestBody Location location){
 
-
-       locationService.addLocation(location);
-        return ResponseEntity.ok(new MessageResponse("Location was added successfully"));
-    }
-
-    @PutMapping("/updateLocation/{id}")
-    public ResponseEntity<?> updateLocation(@PathVariable Long id ,@RequestBody Location newLocation){
-        locationService.updateLocation(id,newLocation);
-        return ResponseEntity.ok(new MessageResponse("Location was updated successfully"));
-    }
-
-    @DeleteMapping("/deleteLocation/{id}")
-    public ResponseEntity<?> deleteLocation(@PathVariable Long id){
-        locationService.deleteLocation(id);
-        return ResponseEntity.ok(new MessageResponse("Location with id "+id+" was deleted successfully"));
-    }
 
 
 

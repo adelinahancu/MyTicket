@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from '../../services/event.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Eveniment } from '../../model/eveniment.model';
 import { MatCardModule } from '@angular/material/card';
 import { Router, RouterModule } from '@angular/router';
@@ -18,12 +18,8 @@ export class EventsComponent implements OnInit {
   isHearIconFilled:boolean[]=[];
   favoriteEvents:Eveniment[]=[];
   favoriteEventIds: number[] = [];
-
   constructor(private eventService:EventService,private router:Router){}
-  
-  
-  
-  ngOnInit(): void {
+     ngOnInit(): void {
     console.log("started fetching all events");
     this.getAllEvents();
     const favoriteEventIdsFromStorage = localStorage.getItem('favoriteEventIds');
@@ -32,10 +28,7 @@ export class EventsComponent implements OnInit {
   }
   const stateData = { favoriteEventIds: this.favoriteEventIds };
   //this.router.navigateByUrl('/myaccount', { state: stateData });
-  
- 
-  }
-
+     }
   getAllEvents():void {
    this.eventService.getAllEvents().subscribe(
     (events:Eveniment[])=>{

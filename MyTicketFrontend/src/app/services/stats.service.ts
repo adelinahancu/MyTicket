@@ -14,6 +14,7 @@ export class StatsService {
   private ticketURL="http://localhost:8080/api/v1/ticket"
   private visitUrl="http://localhost:8080/api/v1/visit"
   private eventUrl="http://localhost:8080/api/v1/events"
+  private adminUrl="http://localhost:8080/api/v1/admin"
  
 
   getUserStats():Observable<UserMonthlyStats[]>{
@@ -25,7 +26,7 @@ export class StatsService {
   getCountOfTicketsSoldForCurrentMonth():Observable<number>{
     const token=localStorage.getItem("access_token");
     const headers=new HttpHeaders({'Authorization':`Bearer ${token}`,'Content-Type':'application/json'});
-    return this.http.get<number>(`${this.ticketURL}/tickets-sold-current-month`);
+    return this.http.get<number>(`${this.adminUrl}/tickets-sold-current-month`,{headers});
   }
 
   incrementVisitCount():Observable<number>{
@@ -40,16 +41,22 @@ export class StatsService {
   }
 
   getWeeklyTicketSales(): Observable<any> {
-    return this.http.get<any>(`${this.ticketURL}/weekly-ticket-sales`);
+    const token=localStorage.getItem('access_token');
+    const headers=new HttpHeaders({'Authorization':`Bearer ${token}`,'Content-Type': 'application/json'});
+    return this.http.get<any>(`${this.adminUrl}/weekly-ticket-sales`,{headers});
     };
   
 
   getTicketSalesByEvent():Observable<any[]>{
-    return this.http.get<any>(`${this.ticketURL}/ticket-sales-by-event`);
+    const token=localStorage.getItem('access_token');
+    const headers=new HttpHeaders({'Authorization':`Bearer ${token}`,'Content-Type': 'application/json'});
+    return this.http.get<any>(`${this.adminUrl}/ticket-sales-by-event`,{headers});
   }
 
   getRevenueByEvent(): Observable<any> {
-    return this.http.get<any>(`${this.eventUrl}/get-events-revenue`);
+    const token=localStorage.getItem('access_token');
+    const headers=new HttpHeaders({'Authorization':`Bearer ${token}`,'Content-Type': 'application/json'});
+    return this.http.get<any>(`${this.adminUrl}/get-events-revenue`,{headers });
   }
 
 }

@@ -14,13 +14,10 @@ import java.util.Map;
 
 @Service
 public class StripeService {
-
     private String secretKey="sk_test_51P92cMP1emHE3cOZbxut2nKVMayfMGCGFEnf1AmyakyQyKse6CaWYK4d6Y65iMMj9Ffi95VBOxhQ71GelheMR2mL00z8qRbPw7";
-
     @PostConstruct
     public void init(){
         Stripe.apiKey=secretKey;
-
     }
     public Charge charge(ChargeRequest chargeRequest)
             throws AuthenticationException, StripeException,InvalidRequestException,

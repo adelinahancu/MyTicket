@@ -6,6 +6,8 @@ import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 function passwordMatchValidator(controlName:string):ValidatorFn{
 
@@ -54,7 +56,7 @@ export class RegistrationComponent {
 
   );
 
-  constructor(private userService:UserService){
+  constructor(private userService:UserService,private router:Router,private snackbar:MatSnackBar){
 
   }
 
@@ -72,6 +74,10 @@ export class RegistrationComponent {
         this.isSignupFailed=false;
         const confirmationToken=data.message;
         localStorage.setItem("confirmationToken",confirmationToken);
+        this.snackbar.open('Cont creat cu succes', 'Inchide', {
+          duration: 3000, // Duration in milliseconds
+          verticalPosition: 'top' // Position of the snackbar
+        });
       },
       err=>{
         console.error(err);
@@ -86,6 +92,7 @@ export class RegistrationComponent {
     console.log('Registration is proceded');
     this.register();
     this.isFormSubmitted=true;
+    this.router.navigateByUrl("/login");
     
   }
 }

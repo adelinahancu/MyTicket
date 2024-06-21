@@ -28,6 +28,5 @@ public class Event {
     private String endTime;
     private int ticketPrice;
     private String imageUrl;
-
-
+    private long ticketsSold;
 }

@@ -1,10 +1,12 @@
 package com.adelina.MyTicket.service;
 
 import com.adelina.MyTicket.auth.AuthenticationRequest;
+import com.adelina.MyTicket.dto.EventSalesMessage;
 import com.adelina.MyTicket.model.*;
 import com.adelina.MyTicket.payload.EmailAttachment;
 import com.adelina.MyTicket.payload.MultipleTicketsRequest;
 import com.adelina.MyTicket.payload.TicketRequest;
+import com.adelina.MyTicket.repo.EventRepo;
 import com.adelina.MyTicket.repo.TicketRepository;
 import com.adelina.MyTicket.repo.UserRepo;
 import com.itextpdf.text.DocumentException;
@@ -15,6 +17,7 @@ import net.glxn.qrgen.image.ImageType;
 import org.apache.commons.io.FileUtils;
 import org.springframework.aop.scope.ScopedProxyUtils;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -43,9 +46,11 @@ public class TicketService {
 
     private final TicketRepository ticketRepository;
     private final UserRepo userRepo;
+    private final EventRepo eventRepo;
 
     private final EmailSenderService emailSenderService;
     private final PdfGeneratorService pdfGeneratorService;
+    private final SimpMessagingTemplate messagingTemplate;
     public boolean isSeatAvailableForEvent(Event event, Seat seat) {
 
         Ticket ticket = ticketRepository.findByEventAndSeat(event, seat);
@@ -102,6 +107,11 @@ public class TicketService {
             }
         }
 
+        long ticketsSold = getTicketsSoldForEvent(event.getId());
+        event.setTicketsSold(ticketsSold);
+        eventRepo.save(event);
+        messagingTemplate.convertAndSend("/topic/ticketSalesUpdates/" + event.getId(),
+                new EventSalesMessage(event.getId(), ticketsSold));
         //emailSenderService.sendEmail(username,"Bilete","Bilete rezervate cu succes");
        // emailSenderService.sendMailWithAttachment(username,"Bilete rezervate cu success!","Bilete","C:\\Users\\adeli\\Downloads\\NOTE DE CURS.pdf");
         emailSenderService.sendMailWithAttachments(username,"Bună ziua! \n\n Ați cumpărat cu succes bilet-ul/tele.\nGăsiți atașate biletele în format pdf și qr codul corespunzător.","Bilete",ticketPdfPaths);
@@ -136,6 +146,10 @@ public class TicketService {
 
     public List<Object[]> getTicketCountByEvent() {
         return ticketRepository.findTicketCountByEvent();
+    }
+
+    public long getTicketsSoldForEvent(int eventId){
+        return ticketRepository.countTicketsSoldForEvent(eventId);
     }
 
 }

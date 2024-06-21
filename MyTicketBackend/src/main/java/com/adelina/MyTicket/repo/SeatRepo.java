@@ -10,11 +10,7 @@ import java.util.List;
 
 @Repository
 public interface SeatRepo extends JpaRepository<Seat,Long> {
-
-
-
     List<Seat> findByLocation(Location location);
-
     Seat findByLocationAndSeatNumber(Location location, int seatNumber);
 
 

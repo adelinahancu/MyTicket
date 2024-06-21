@@ -52,7 +52,9 @@
             <ng-container *ngFor="let seat of seats">
                 <rect [attr.x]="seat.x" [attr.y]="seat.y" [attr.rx]="5" [attr.ry]="5" width="30" height="30"
                     (click)="onSeatSelected(seat)"
-                    [ngClass]="{ 'booked': !seatAvailability[seat.id], 'available': seatAvailability[seat.id],'unavailable-seat': seatAvailability[seat.id],'available-seat': !seatAvailability[seat.id] ,'selected': isSeatSelected(seat) }"></rect>
+                    [ngClass]="{ 'available': !seatAvailability[seat.id], 'booked': seatAvailability[seat.id],
+                    'unavailable-seat': seatAvailability[seat.id],'available-seat': !seatAvailability[seat.id] ,
+                    'selected': isSeatSelected(seat) }"></rect>
             </ng-container>
         </svg>
 

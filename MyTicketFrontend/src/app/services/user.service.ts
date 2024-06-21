@@ -10,7 +10,7 @@ import { UserDto } from '../model/userDto.model';
 })
 export class UserService {
  
-
+isAdmin:boolean=false;
   private baseUrl="http://localhost:8080/api/v1/auth"
 
   constructor(private http:HttpClient) { }
@@ -65,6 +65,9 @@ export class UserService {
     return this.http.post<any>(`${this.baseUrl}/logout`,null,{headers});
   }
 
+  getIsAdmin(): boolean {
+    return this.isAdmin;
+  }
  
 
 

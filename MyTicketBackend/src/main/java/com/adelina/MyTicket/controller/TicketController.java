@@ -80,21 +80,5 @@ public class TicketController {
 
     }
 
-    @GetMapping("/tickets-sold-current-month")
-    public ResponseEntity<Long> getTicketsSoldForCurrentMonth(){
-        return new ResponseEntity<>(ticketService.getTicketsSoldForCurrentMonth(),HttpStatus.OK);
-    }
 
-    @GetMapping("/weekly-ticket-sales")
-    public ResponseEntity<List<Object[]>> getWeeklyTicketSales(){
-        LocalDateTime startDate= YearMonth.now().minusYears(1).atDay(1).atStartOfDay();
-        LocalDateTime endDate=LocalDateTime.now();
-        List<Object[]> sales=ticketService.getWeeklyTicketSales(startDate,endDate);
-        return new ResponseEntity<>(sales,HttpStatus.OK);
-    }
-
-    @GetMapping("/ticket-sales-by-event")
-    public List<Object[]> getTicketSalesByEvent() {
-        return ticketService.getTicketCountByEvent();
-    }
 }

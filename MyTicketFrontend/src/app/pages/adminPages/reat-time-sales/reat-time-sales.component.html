@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row">
+      <app-dashboard class="col-lg-2"></app-dashboard>
+      <div class="col-lg-10" style="width:900px; height:400px; margin-left:0px; margin-top:90px;">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 custom-table" matSort>
+  
+          <!-- Location Column -->
+          <ng-container matColumnDef="location">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="background-color: rgb(58, 181, 181); color: white;">Locatie</th>
+            <td mat-cell *matCellDef="let event">{{ event.location.locationName }}</td>
+          </ng-container>
+  
+          <!-- Event Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="background-color: rgba(58, 181, 181); color: white;">Eveniment</th>
+            <td mat-cell *matCellDef="let event">{{ event.eventName }}</td>
+          </ng-container>
+  
+          <!-- Tickets Sold Column -->
+          <ng-container matColumnDef="ticketsSold">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="background-color: rgb(58, 181, 181); color: white; text-align: center;">Bilete vandute</th>
+            <td mat-cell *matCellDef="let event" style="text-align: center;">{{ event.ticketsSold }}</td>
+          </ng-container>
+  
+          <!-- Header and Row Declarations -->
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+  
+        </table>
+      </div>
+    </div>
+  </div>
+  

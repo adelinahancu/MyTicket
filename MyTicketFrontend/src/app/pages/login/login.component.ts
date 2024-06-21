@@ -8,15 +8,15 @@ import { AuthenticationRequest } from '../../model/authRequest.model';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FooterComponent } from "../footer/footer.component";
 
 
 @Component({
-  
-  selector: 'app-login',
-  standalone: true,
-  imports: [MatButtonModule,MatCardModule,MatInputModule,MatIconModule,FormsModule, CommonModule,ReactiveFormsModule],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+    selector: 'app-login',
+    standalone: true,
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.css',
+    imports: [MatButtonModule, MatCardModule, MatInputModule, MatIconModule, FormsModule, CommonModule, ReactiveFormsModule, FooterComponent]
 })
 export class LoginComponent implements OnInit {
 
@@ -27,6 +27,8 @@ export class LoginComponent implements OnInit {
   hide=true;
   isFormSubmitted=false;
   isSuccess=true;
+  private isAdmin = false;
+  
 
   loginForm:FormGroup=new FormGroup({
     email:new FormControl('',[Validators.required,Validators.email]),
@@ -48,15 +50,30 @@ export class LoginComponent implements OnInit {
     this.loginService.login(authRequest).subscribe(response => {
       console.log('Authentication is successful:',response); 
       console.log('Access Token:', response["access_token"]);
+    
+      const isAdmin = response.role === 'ADMIN';
+      localStorage.setItem("isAdmin", isAdmin ? "true" : "false");
       localStorage.setItem("access_token",response["access_token"]);
+      
      
       this.showWrongCredentials = false;
-      this.router.navigateByUrl("");
+      if (isAdmin) {
+        // Redirect admin to the dashboard
+        this.router.navigateByUrl("/dashboard");
+      } else {
+        // Redirect regular user to the home page
+        this.router.navigateByUrl("/home");
+      }
     },
     (error)=>{
       console.error('Authentication failed:',error);
       this.showWrongCredentials = true;
-      this.errorMessage = error.error.message;
+      if (error.error && error.error.message) {
+        this.errorMessage = error.error.message;
+      } else {
+        this.errorMessage = 'An error occurred while trying to login. Please try again later.';
+      }
+      
     });
     
   }

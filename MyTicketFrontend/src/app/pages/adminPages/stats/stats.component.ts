@@ -65,10 +65,8 @@ export class StatsComponent implements OnInit {
           'Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie',
           'Iulie', 'August', 'Septembrie', 'Octombrie', 'Noiembrie', 'DecembrieS'
         ];
-
         const labels = data.map(stat => monthNames[new Date(stat.month).getMonth()]);
         const counts = data.map(stat => stat.userCount);
-
         this.chart = new Chart(this.chartRef.nativeElement, {
           type: 'bar',
           data: {

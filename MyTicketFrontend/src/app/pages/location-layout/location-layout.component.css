@@ -14,11 +14,10 @@ rect{
    
 }
 
-.booked {
+.available {
     fill: #FFBF00;
   }
-  
-  .available {
+    .booked {
     fill: #dddddd;
   }
 
@@ -61,7 +60,17 @@ rect{
     align-items: center;
     margin-left:20px;
    margin-right:20px;
+   min-height: 100vh;
    
+  }
+  .page-container {
+   
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-container {
+    flex: 1; /* This will make the form container grow to fill the remaining space */
   }
   
   .status-container {

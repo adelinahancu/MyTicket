@@ -5,7 +5,7 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" #navbarTogglerBtn (click)="toggleNavbar">
         <span class="navbar-toggler-icon"></span>
       </button>
-    <a class="navbar-brand gradient" href="">MyTicket
+    <a class="navbar-brand gradient" href="/home">MyTicket
       <i class="bi bi-ticket-detailed bg-customized"></i>
     </a>
     
@@ -23,7 +23,14 @@
           <a class="nav-link" href="/locations" style="color:black;">Locatii</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" style="color:black;">Categorii</a>
+          <div class="container h-100">
+            <div class="d-flex justify-content-center h-100">
+                <div class="searchbar">
+                    <input class="search_input" type="text" name="search" placeholder="Search..." [(ngModel)]="searchQuery">
+                    <a href="/search-results"  class="search_icon" (click)="onSearch()"><i class="fas fa-search"></i></a>
+                </div>
+            </div>
+        </div>
         </li>
         
         </ul>

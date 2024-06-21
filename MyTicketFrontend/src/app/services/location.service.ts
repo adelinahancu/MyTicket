@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Locatie } from '../model/location.model';
@@ -9,6 +9,7 @@ import { Locatie } from '../model/location.model';
 export class LocationService {
 
   private baseUrl="http://localhost:8080/api/v1/location";
+  private adminUrl="http://localhost:8080/api/v1/admin"
 
   constructor(private http:HttpClient) { }
 
@@ -17,7 +18,9 @@ export class LocationService {
   }
 
   addLocation( location:Locatie):Observable<any>{
-    return this.http.post(`${this.baseUrl}/addLocation`,location);
+    const token=localStorage.getItem('access_token');
+    const headers=new HttpHeaders({'Authorization':`Bearer ${token}`,'Content-Type': 'application/json'});
+    return this.http.post(`${this.adminUrl}/addLocation`,location,{headers});
   }
   
 }

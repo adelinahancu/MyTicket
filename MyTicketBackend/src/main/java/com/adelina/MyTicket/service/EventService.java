@@ -30,4 +30,8 @@ public class EventService {
     public Event addEvent(Event event){
        return  eventRepo.save(event);
     }
+
+    public List<Event> searchEvents(String query) {
+        return eventRepo.searchEvents(query);
+    }
 }

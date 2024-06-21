@@ -1,5 +1,6 @@
+   <div class="page-container">
+   <div class="form-container" >
 
-    <div class="form-container">
       
         <div class="form login_form">
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -19,6 +20,7 @@
                         <span *ngIf="loginForm.controls['password'].errors?.['minlength']">*Min 6 characters required.</span>
                         </div>
                     <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <div class="error-message" *ngIf="errorMessage" style="color:red">{{ errorMessage }}</div>
                     
                 </div>
                 <button class="button" type="submit" >Conectează-te</button>
@@ -29,3 +31,5 @@
             </form>
         </div>
     </div>
+</div>
+

@@ -4,12 +4,15 @@ import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SerachService } from '../../services/serach.service';
+import { Eveniment } from '../../model/eveniment.model';
 
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [MatIcon,CommonModule],
+  imports: [MatIcon,CommonModule,ReactiveFormsModule,FormsModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
@@ -18,10 +21,12 @@ export class NavbarComponent {
   user:User=new User();
   isNavbarExpanded=false;
   isClicked=false;
+  searchQuery:string='';
+  searchResults:Eveniment[]=[];
   @Output() navbarExpanded=new EventEmitter<boolean>();
   
 
-  constructor(private userService:UserService,private router:Router,private elementRef: ElementRef){}
+  constructor(private userService:UserService,private router:Router,private elementRef: ElementRef,private searchService:SerachService){}
 
 
 
@@ -74,8 +79,23 @@ export class NavbarComponent {
     this.navbarExpanded.emit(this.isNavbarExpanded);
   }
  
+  onSearch() {
+    console.log("Searching ...");
+    if (this.searchQuery.trim()) {
+      this.searchService.searchEvents(this.searchQuery).subscribe(results => {
+        this.searchResults = results;
+        const state = { searchResults: this.searchResults, searchQuery: this.searchQuery };
+        history.pushState(state, '', '/search-results');
+        this.router.navigateByUrl('/search-results');
+        
+        console.log('Results',this.searchResults);
+      },
+        error => {
+          console.error('Error occured while searching events', error);
+        });
 
 
+    }
 
-
+  }
 }

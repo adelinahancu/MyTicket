@@ -16,7 +16,6 @@ public class ChargeRequest {
     private String number;
     private Integer expMonth;
     private Integer  expYear;
-
     private String cvc;
     private String cardHolderName;
     private String email;

@@ -21,8 +21,6 @@ public class Seat {
     private int rowNumber;
     private int x;
     private int y;
-
-
     @ManyToOne
     @JoinColumn(name = "location_id")
     private Location location;

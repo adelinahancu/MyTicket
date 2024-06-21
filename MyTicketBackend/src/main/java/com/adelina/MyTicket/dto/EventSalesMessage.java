@@ -1,2 +1,13 @@
-package com.adelina.MyTicket.dto;public class EventSalesMessage {
+package com.adelina.MyTicket.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class EventSalesMessage {
+    private int eventId;
+    private long ticketsSold;
 }

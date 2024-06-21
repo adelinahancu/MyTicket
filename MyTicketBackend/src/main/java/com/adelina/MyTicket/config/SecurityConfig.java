@@ -20,16 +20,16 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
     private final LogoutHandler logoutHandler;
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
         http
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/v1/auth/**","/api/v1/location/**","/api/v1/ticket/**","/api/v1/events/**","/charge")
+                .requestMatchers("/api/v1/auth/**","/api/v1/location/**",
+                                "/api/v1/ticket/**","/api/v1/events/**","/charge","/ws/**")
                 .permitAll()
+                .requestMatchers("/api/v1/admin/**","/api/v1/stats/monthly-registration").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -42,7 +42,6 @@ public class SecurityConfig {
                 .logoutUrl("/api/v1/auth/logout")
                 .addLogoutHandler(logoutHandler)
                 .logoutSuccessHandler(((request, response, authentication) -> SecurityContextHolder.clearContext()));
-
 
         return http.build();
     }

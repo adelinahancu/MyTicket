@@ -5,6 +5,7 @@ import com.adelina.MyTicket.model.Seat;
 import com.adelina.MyTicket.model.Ticket;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -35,4 +36,8 @@ public interface TicketRepository extends JpaRepository<Ticket,Long> {
 
     @Query("SELECT e.eventName, COUNT(t) FROM Ticket t JOIN t.event e GROUP BY e.eventName")
     List<Object[]> findTicketCountByEvent();
+
+    @Query("SELECT COUNT(t) FROM Ticket t WHERE t.event.id = :eventId")
+    long countTicketsSoldForEvent(@Param("eventId") int eventId);
 }
+
